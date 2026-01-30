@@ -135,6 +135,18 @@ public class DoublyLinkedList<E> implements List<E> {
 
     private E remove(Node<E> n) {
         // TODO
+	if(isEmpty()){
+		return null;
+	}
+	Node<E> node = head;
+	while(node != tail){
+		node = node.getNext();
+		if(node = n){
+			node.getNext().setPrev(node.getPrev());
+			node.getPrev().setNext(node.getNext());
+			return n.getElement();
+		}
+	}
         return null;
     }
 
