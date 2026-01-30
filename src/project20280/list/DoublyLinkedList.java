@@ -192,11 +192,13 @@ public class DoublyLinkedList<E> implements List<E> {
     @Override
     public void addLast(E e) {
         // TODO
+	add(size-1, e);
     }
 
     @Override
     public void addFirst(E e) {
         // TODO
+	add(
     }
 
     public String toString() {
