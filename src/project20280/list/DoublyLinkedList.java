@@ -92,7 +92,7 @@ public class DoublyLinkedList<E> implements List<E> {
 	}
 	Node<E> nodeToBeAdded = new Node(e, node, node.getNext());
 	node.setNext(nodeToBeAdded);
-	nodeToBeAdded.getNext().set
+	nodeToBeAdded.getNext().setPrev(nodeToBeAdded);
     }
 
     @Override
