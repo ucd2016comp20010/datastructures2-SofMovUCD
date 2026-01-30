@@ -60,7 +60,14 @@ public class DoublyLinkedList<E> implements List<E> {
     @Override
     public E get(int i) {
         // TODO
-        return null;
+	if(isEmpty() || i >= size){
+		return null;
+	}
+	Node<E> node = head; 
+        for(int j = 0; j < i; j++){
+		node = node.getNext();
+	}
+	return node.getElement();
     }
 
     @Override
