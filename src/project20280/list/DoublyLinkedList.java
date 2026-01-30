@@ -40,7 +40,7 @@ public class DoublyLinkedList<E> implements List<E> {
 
     private final Node<E> head;
     private final Node<E> tail;
-    private final int size = 0;
+    private int size = 0;
 
     public DoublyLinkedList() {
         head = new Node<E>(null, null, null);
@@ -198,7 +198,7 @@ public class DoublyLinkedList<E> implements List<E> {
     @Override
     public void addFirst(E e) {
         // TODO
-	add(
+	add(0, e);
     }
 
     public String toString() {
