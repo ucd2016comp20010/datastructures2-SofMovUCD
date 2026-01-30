@@ -139,6 +139,7 @@ public class SinglyLinkedList<E> implements List<E> {
 	if(isEmpty() || position >= size){
 		return null;
 	}
+	size--;
 	if(position == 0){//first node to be removed
 		Node<E> node = head;
 		head = head.getNext();
@@ -161,13 +162,13 @@ public class SinglyLinkedList<E> implements List<E> {
     @Override
     public E removeFirst() {
         // TODO
-        return null;
+        return remove(0);
     }
 
     @Override
     public E removeLast() {
         // TODO
-        return null;
+        return remove(size-1);
     }
 
     //@Override
