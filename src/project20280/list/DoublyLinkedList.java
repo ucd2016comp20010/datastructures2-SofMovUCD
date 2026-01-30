@@ -98,7 +98,18 @@ public class DoublyLinkedList<E> implements List<E> {
     @Override
     public E remove(int i) {
         // TODO
-        return null;
+	if(isEmpty() || i >= size){
+		return null;
+	}
+	Node<E> node = head;//node to be removed
+	for(int j = 0; j < size; j++){
+		node = node.getNext();
+	}
+	node.getPrev().setNext(node.getNext());
+	node.getNext().setPrev(node.getPrev());
+
+	return node.getElement();
+
     }
 
     private class DoublyLinkedListIterator<E> implements Iterator<E> {
