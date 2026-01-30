@@ -53,6 +53,17 @@ public class DoublyLinkedList<E> implements List<E> {
 	if(isEmpty()){ //if the two nodes dont exist in succession then dont add anything
 		return null;
 	}
+	Node<E> node = head;
+	while(node != pred){
+		node = node.getNext();
+	}
+	if(node.getNext() == succ){
+		Node<E> nodeToAdd = new Node(e, node.getPrev(), node.getNext());
+		node.setNext(nodeToAdd);
+		node.getNext().getNext().setPrev(nodeToAdd);
+	}
+	return null;
+
     }
 
     @Override
@@ -93,6 +104,7 @@ public class DoublyLinkedList<E> implements List<E> {
 	Node<E> nodeToBeAdded = new Node(e, node, node.getNext());
 	node.setNext(nodeToBeAdded);
 	nodeToBeAdded.getNext().setPrev(nodeToBeAdded);
+	size++;
     }
 
     @Override
@@ -107,7 +119,7 @@ public class DoublyLinkedList<E> implements List<E> {
 	}
 	node.getPrev().setNext(node.getNext());
 	node.getNext().setPrev(node.getPrev());
-
+	size--;
 	return node.getElement();
 
     }
@@ -144,6 +156,7 @@ public class DoublyLinkedList<E> implements List<E> {
 		if(node = n){
 			node.getNext().setPrev(node.getPrev());
 			node.getPrev().setNext(node.getNext());
+			size--;
 			return n.getElement();
 		}
 	}
@@ -159,13 +172,16 @@ public class DoublyLinkedList<E> implements List<E> {
 
     public E last() {
         // TODO
-        return null;
+	if (isEmpty()) {
+            return null;
+        }
+        return tail.getPrev().getData();
     }
 
     @Override
     public E removeFirst() {
         // TODO
-        return null;
+        return remove(0);
     }
 
     @Override
