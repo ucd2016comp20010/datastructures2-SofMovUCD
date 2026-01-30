@@ -23,6 +23,8 @@ public class SinglyLinkedList<E> implements List<E> {
          */
         public Node(E e, Node<E> n) {
             // TODO
+	    this.element = e;
+	    this.next = n;
         }
 
         // Accessor methods
@@ -33,7 +35,7 @@ public class SinglyLinkedList<E> implements List<E> {
          * @return the element stored at the node
          */
         public E getElement() {
-            return null;
+            return element;
         }
 
         /**
@@ -43,7 +45,7 @@ public class SinglyLinkedList<E> implements List<E> {
          */
         public Node<E> getNext() {
             // TODO
-            return null;
+            return next;
         }
 
         // Modifier methods
@@ -55,6 +57,7 @@ public class SinglyLinkedList<E> implements List<E> {
          */
         public void setNext(Node<E> n) {
             // TODO
+	    this.next = n;
         }
     } //----------- end of nested Node class -----------
 
@@ -69,25 +72,30 @@ public class SinglyLinkedList<E> implements List<E> {
      */
     private int size = 0;                      // number of nodes in the list
 
-    public SinglyLinkedList() {
-    }              // constructs an initially empty list
+    public SinglyLinkedList() {}              // constructs an initially empty list
 
     //@Override
     public int size() {
         // TODO
-        return 0;
+        return size;
     }
 
     //@Override
     public boolean isEmpty() {
         // TODO
-        return false;
+        return size == 0;
     }
 
     @Override
-    public E get(int position) {
+    public E get(int position) { //position starts from 0
         // TODO
-        return null;
+	Node<E> node = head; 
+	if(isEmpty() || position > size){
+		return null;
+	}
+	for(int i = 0; i <= position; i++){ node = node.getNext();}
+
+        return node.getElement();
     }
 
     @Override
