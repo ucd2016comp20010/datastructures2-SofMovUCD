@@ -54,7 +54,7 @@ public class DoublyLinkedList<E> implements List<E> {
     @Override
     public boolean isEmpty() {
         // TODO
-        return false;
+        return size == 0;
     }
 
     @Override
