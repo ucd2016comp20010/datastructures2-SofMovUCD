@@ -48,7 +48,7 @@ public class DoublyLinkedList<E> implements List<E> {
     @Override
     public int size() {
         // TODO
-        return 0;
+        return size;
     }
 
     @Override
