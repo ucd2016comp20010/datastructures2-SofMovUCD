@@ -136,7 +136,26 @@ public class SinglyLinkedList<E> implements List<E> {
     @Override
     public E remove(int position) {
         // TODO
-        return null;
+	if(isEmpty() || position >= size){
+		return null;
+	}
+	if(position == 0){//first node to be removed
+		Node<E> node = head;
+		head = head.getNext();
+		return node;
+	}
+	Node<E> nodeBefore = head;
+        for(int i = 1; i <= position; i++){//get to node right before the one to remove;
+		nodeBefore = nodeBefore.getNext();
+	}
+	Node<E> nodeToBeRemoved = nodeBefore.getNext();
+
+	if(nodeToBeRemoved.getNext() == null){//last element is removed
+		nodeBefore.setNext(null);
+		return nodeToBeRemoved;
+	}
+	nodeBefore.setNext(nodeBefore.getNext().getNext());
+	return nodeToBeRemoved;
     }
 
     @Override
