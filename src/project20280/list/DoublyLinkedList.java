@@ -61,9 +61,8 @@ public class DoublyLinkedList<E> implements List<E> {
 		Node<E> nodeToAdd = new Node(e, node.getPrev(), node.getNext());
 		node.setNext(nodeToAdd);
 		node.getNext().getNext().setPrev(nodeToAdd);
+		size++;
 	}
-	return null;
-
     }
 
     @Override
@@ -187,7 +186,7 @@ public class DoublyLinkedList<E> implements List<E> {
     @Override
     public E removeLast() {
         // TODO
-        return null;
+        return remove(size-1);
     }
 
     @Override
