@@ -101,17 +101,36 @@ public class SinglyLinkedList<E> implements List<E> {
     @Override
     public void add(int position, E e) {
         // TODO
+	if(isEmpty() || position > size){
+		return null;
+	}
+	Node<E> node = head;
+	for(int i = 0; i <= position; i++){node = node.getNext();}
+
+	Node<E> newNode = new newNode(e, null);
+	node.setNext(newNode);
+	size++;
     }
 
 
     @Override
     public void addFirst(E e) {
         // TODO
+	if(isEmpty()){
+		Node<E> newNode = new newNode(e, null);
+        	this.head = newNode;
+	}
+	add(0, e);
     }
 
     @Override
     public void addLast(E e) {
         // TODO
+	if(isEmpty()){
+                Node<E> newNode = new newNode(e, null);
+                this.head = newNode;
+        }
+	add(size-1, e);
     }
 
     @Override
