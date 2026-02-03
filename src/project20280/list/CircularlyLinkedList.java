@@ -144,6 +144,7 @@ public class CircularlyLinkedList<E> implements List<E> {
     @Override
     public void addFirst(E e) {
         // TODO
+	add(0, e);
     }
 
     @Override
