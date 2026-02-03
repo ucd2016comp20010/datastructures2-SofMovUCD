@@ -72,6 +72,7 @@ public class CircularlyLinkedList<E> implements List<E> {
 	}
 	Node<T> nodeToAdd = new Node(e, node.getNext());
 	node.setNext(nodeToAdd);
+	size++;
     }
 
     @Override
@@ -86,7 +87,7 @@ public class CircularlyLinkedList<E> implements List<E> {
 	}
 	Node<T> removed = node.getNext();
 	node.setNext(node.getNext().getNext());
-
+	size--;
         return removed;
     }
 
