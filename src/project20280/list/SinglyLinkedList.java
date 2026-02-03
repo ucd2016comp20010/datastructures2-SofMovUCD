@@ -90,10 +90,10 @@ public class SinglyLinkedList<E> implements List<E> {
     public E get(int position) { //position starts from 0
         // TODO
 	Node<E> node = head; 
-	if(isEmpty() || position > size){
+	if(isEmpty() || position >= size){
 		return null;
 	}
-	for(int i = 0; i <= position; i++){ node = node.getNext();}
+	for(int i = 0; i < position; i++){ node = node.getNext();}
 
         return node.getElement();
     }
@@ -101,38 +101,51 @@ public class SinglyLinkedList<E> implements List<E> {
     @Override
     public void add(int position, E e) {
         // TODO
-	if(isEmpty() || position > size){
-		return;
-	}
-	Node<E> node = head;
-	for(int i = 0; i <= position; i++){node = node.getNext();}
 
-	Node<E> newNode = new Node<E>(e, null);
-	node.setNext(newNode);
-	size++;
+
+	if(position <= 0){
+//        Node<E> headNext = head;
+		head = new Node<>(e, head);//set the new heads next node as the current head
+        size++;
+        return;
+	}
+    if(position > size || isEmpty()) return;
+ 	Node<E> node = head;
+	for(int i = 0; i < position-1; i++){//get to position right before position to add to
+        node = node.getNext();
+    }
+
+    if(position == size){ //adding last node
+        node.setNext( new Node<>(e, null));
+        size++;
+        return;
+    }
+    Node<E> newNode = new Node<E>(e, node.getNext());
+    node.setNext(newNode);
+    size++;
     }
 
 
     @Override
     public void addFirst(E e) {
         // TODO
-        if(isEmpty()){
-            Node<E> newNode = new Node<E>(e, null);
-            this.head = newNode;
-            size++;
-            return;
-        }
+//        if(isEmpty()){
+//            Node<E> newNode = new Node<E>(e, null);
+//            this.head = newNode;
+//            size++;
+//            return;
+//        }
         add(0, e);
     }
 
     @Override
     public void addLast(E e) {
         // TODO
-	if(isEmpty()){
-                Node<E> newNode = new Node<E>(e, null);
-                this.head = newNode;
-        }
-	add(size-1, e);
+//	if(isEmpty()){
+//                Node<E> newNode = new Node<E>(e, null);
+//                this.head = newNode;
+//        }
+	add(size, e);
     }
 
     @Override
@@ -141,14 +154,15 @@ public class SinglyLinkedList<E> implements List<E> {
 	if(isEmpty() || position >= size){
 		return null;
 	}
+
 	size--;
 	if(position == 0){//first node to be removed
-		Node<E> node = head;
-		head = head.getNext();
-		return node.getElement();
+		Node<E> node = head; //saving the head node
+		head = head.getNext(); //moving the head one to the next node
+		return node.getElement(); //returning the original head
 	}
 	Node<E> nodeBefore = head;
-        for(int i = 1; i <= position; i++){//get to node right before the one to remove;
+        for(int i = 0; i < position-1; i++){//get to node right before the one to remove;
 		nodeBefore = nodeBefore.getNext();
 	}
 	Node<E> nodeToBeRemoved = nodeBefore.getNext();
