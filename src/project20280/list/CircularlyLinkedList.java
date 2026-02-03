@@ -6,29 +6,29 @@ import java.util.Iterator;
 
 public class CircularlyLinkedList<E> implements List<E> {
 
-    private class Node<T> {
-        private final T data;
-        private Node<T> next;
+    private static class Node<E> {
+        private final E data;
+        private Node<E> next;
 
-        public Node(T e, Node<T> n) {
+        public Node(E e, Node<E> n) {
             data = e;
             next = n;
         }
 
-        public T getData() {
+        public E getData() {
             return data;
         }
 
-        public void setNext(Node<T> n) {
+        public void setNext(Node<E> n) {
             next = n;
         }
 
-        public Node<T> getNext() {
+        public Node<E> getNext() {
             return next;
         }
     }
 
-    private final Node<E> tail = null;
+    private Node<E> tail = null;
     private int size = 0;
 
     public CircularlyLinkedList() {
@@ -50,7 +50,7 @@ public class CircularlyLinkedList<E> implements List<E> {
         for(int j = 0; j < i; j++){
 		node = node.getNext();
 	}
-	return node.getElement();
+	return node.getData();
     }
 
     /**
@@ -64,13 +64,13 @@ public class CircularlyLinkedList<E> implements List<E> {
     public void add(int i, E e) {
         // TODO
 	if(isEmpty() || i > size){
-		return null;
+		return;
 	}
-	Node<T> node = tail;
+	Node<E> node = tail;
 	for(int j = 0; j < i; j++){//starting from tail
 		node = node.getNext();
 	}
-	Node<T> nodeToAdd = new Node(e, node.getNext());
+	Node<E> nodeToAdd = new Node<E>(e, node.getNext());
 	node.setNext(nodeToAdd);
 	size++;
     }
@@ -81,14 +81,14 @@ public class CircularlyLinkedList<E> implements List<E> {
 	if(isEmpty() || i >= size){
 		return null;
 	}
-	Node<T> node = tail;
+	Node<E> node = tail;
 	for(int j = 0; j < i; j++){//starting from tail so will get to element before insertion (starting from -1 instead of 0)
 		node = node.getNext();
 	}
-	Node<T> removed = node.getNext();
+	Node<E> removed = node.getNext();
 	node.setNext(node.getNext().getNext());
 	size--;
-        return removed;
+        return removed.getData();
     }
 
     public void rotate() {
@@ -129,10 +129,10 @@ public class CircularlyLinkedList<E> implements List<E> {
 	if(isEmpty()){
 		return null;
 	}
-	Node<T> removed = tail.getNext();
-	tail.setNext(tail.getNext.getNext());
+	Node<E> removed = tail.getNext();
+	tail.setNext(tail.getNext().getNext());
 	size--;
-        return removed;
+        return removed.getData();
     }
 
     @Override
