@@ -29,7 +29,7 @@ class SinglyLinkedListTest {
         ll.addLast(3);
 
         Integer r = ll.get(2);
-        assertEquals(3, r, "did not get right element" + r);
+        assertEquals(3, r, "did not get right element " + r);
     }
 
     @Test
