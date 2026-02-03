@@ -83,8 +83,9 @@ public class DoublyLinkedList<E> implements List<E> {
 	if(isEmpty() || i >= size){
 		return null;
 	}
-	Node<E> node = head; 
-        for(int j = 0; j < i; j++){
+	Node<E> node = head;
+
+    for(int j = 0; j != i; j++){
 		node = node.getNext();
 	}
 	return node.getData();
@@ -93,17 +94,29 @@ public class DoublyLinkedList<E> implements List<E> {
     @Override
     public void add(int i, E e) {
         // TODO
-	if(isEmpty() || i >= size){
-		return;
-	}
-	Node<E> node = head;
-	for(int j = 1; j < i; j++){ //get to the node before the position at which the node must be added
-		node = node.getNext();
-	}
-	Node<E> nodeToBeAdded = new Node(e, node, node.getNext());
-	node.setNext(nodeToBeAdded);
-	nodeToBeAdded.getNext().setPrev(nodeToBeAdded);
-	size++;
+        if(i <= 0){
+            //set as the next element after the head and assign pointers correctly
+            head.setNext(new Node<>(e,head, head.getNext()));
+            size++;
+            return;
+        }
+        if(i > size || isEmpty()) return;
+
+        Node<E> node = head;
+        //get to the node before the position at which the node must be added
+        // but because we start from -1 element (head) we must go the equivalent of its index
+        for(int j = 0; j < i; j++){
+            node = node.getNext();
+        }
+        if (i == size) { //adding last node
+            node.setNext(new Node<>(e, node, tail));
+            size++;
+            return;
+        }
+        Node<E> nodeToBeAdded = new Node<>(e, node, node.getNext());
+        node.getNext().setPrev(nodeToBeAdded);
+        node.setNext(nodeToBeAdded);
+        size++;
     }
 
     @Override
