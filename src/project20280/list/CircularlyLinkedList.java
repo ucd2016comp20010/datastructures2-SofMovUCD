@@ -67,7 +67,7 @@ public class CircularlyLinkedList<E> implements List<E> {
 		return null;
 	}
 	Node<T> node = tail;
-	for(int j = 0; j < i-1; j++){
+	for(int j = 0; j < i; j++){//starting from tail
 		node = node.getNext();
 	}
 	Node<T> nodeToAdd = new Node(e, node.getNext());
@@ -77,7 +77,17 @@ public class CircularlyLinkedList<E> implements List<E> {
     @Override
     public E remove(int i) {
         // TODO
-        return null;
+	if(isEmpty() || i >= size){
+		return null;
+	}
+	Node<T> node = tail;
+	for(int j = 0; j < i; j++){//starting from tail so will get to element before insertion (starting from -1 instead of 0)
+		node = node.getNext();
+	}
+	Node<T> removed = node.getNext();
+	node.setNext(node.getNext().getNext());
+
+        return removed;
     }
 
     public void rotate() {
