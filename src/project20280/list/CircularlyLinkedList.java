@@ -138,7 +138,7 @@ public class CircularlyLinkedList<E> implements List<E> {
     @Override
     public E removeLast() {
         // TODO
-        return null;
+        return remove(size-1);
     }
 
     @Override
