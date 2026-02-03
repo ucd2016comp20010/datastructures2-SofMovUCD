@@ -51,14 +51,14 @@ public class DoublyLinkedList<E> implements List<E> {
     private void addBetween(E e, Node<E> pred, Node<E> succ) {
         // TODO
 	if(isEmpty()){ //if the two nodes dont exist in succession then dont add anything
-		return null;
+		return;
 	}
 	Node<E> node = head;
 	while(node != pred){
 		node = node.getNext();
 	}
 	if(node.getNext() == succ){
-		Node<E> nodeToAdd = new Node(e, node.getPrev(), node.getNext());
+		Node<E> nodeToAdd = new Node<E>(e, node.getPrev(), node.getNext());
 		node.setNext(nodeToAdd);
 		node.getNext().getNext().setPrev(nodeToAdd);
 		size++;
@@ -87,14 +87,14 @@ public class DoublyLinkedList<E> implements List<E> {
         for(int j = 0; j < i; j++){
 		node = node.getNext();
 	}
-	return node.getElement();
+	return node.getData();
     }
 
     @Override
     public void add(int i, E e) {
         // TODO
 	if(isEmpty() || i >= size){
-		return null;
+		return;
 	}
 	Node<E> node = head;
 	for(int j = 1; j < i; j++){ //get to the node before the position at which the node must be added
@@ -119,7 +119,7 @@ public class DoublyLinkedList<E> implements List<E> {
 	node.getPrev().setNext(node.getNext());
 	node.getNext().setPrev(node.getPrev());
 	size--;
-	return node.getElement();
+	return node.getData();
 
     }
 
@@ -152,11 +152,11 @@ public class DoublyLinkedList<E> implements List<E> {
 	Node<E> node = head;
 	while(node != tail){
 		node = node.getNext();
-		if(node = n){
+		if(node == n){
 			node.getNext().setPrev(node.getPrev());
 			node.getPrev().setNext(node.getNext());
 			size--;
-			return n.getElement();
+			return n.getData();
 		}
 	}
         return null;
