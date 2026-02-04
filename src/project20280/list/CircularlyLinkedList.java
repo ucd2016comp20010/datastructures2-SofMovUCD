@@ -47,7 +47,7 @@ public class CircularlyLinkedList<E> implements List<E> {
 		return null;
 	}
 	Node<E> node = tail;
-        for(int j = 0; j < i; j++){
+        for(int j = -1; j < i; j++){
 		node = node.getNext();
 	}
 	return node.getData();
