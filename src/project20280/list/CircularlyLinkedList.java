@@ -78,7 +78,7 @@ public class CircularlyLinkedList<E> implements List<E> {
         if(isEmpty() || i > size) return;
 
         Node<E> node = tail;
-        for(int j = -1; j <= i; j++){//starting from tail
+        for(int j = 0; j < i; j++){//starting from tail
             node = node.getNext();
         }
 //        if(i == size){ //adding last node
