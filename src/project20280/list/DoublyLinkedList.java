@@ -188,7 +188,7 @@ public class DoublyLinkedList<E> implements List<E> {
 	if (isEmpty()) {
             return null;
         }
-        return tail.getPrev().getData();
+        return get(size-1);
     }
 
     @Override
