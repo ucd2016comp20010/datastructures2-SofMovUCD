@@ -185,6 +185,29 @@ public class SinglyLinkedList<E> implements List<E> {
         return remove(size-1);
     }
 
+    public SinglyLinkedList<E> copy() {
+        SinglyLinkedList<E> twin = new SinglyLinkedList<E>();
+        Node<E> tmp = head;
+        while (tmp != null) {
+            twin.addLast(tmp.getElement());
+            tmp = tmp.next;
+        }
+        return twin;
+    }
+
+    public void reverse() {
+        Node<E> prev = null;
+        Node<E> curr = head;
+        Node<E> next;
+        while(curr != null) {
+            next = curr.getNext();
+            curr.setNext(prev);
+            prev = curr;
+            curr = next;
+        }
+        head = prev;
+    }
+
     //@Override
     public Iterator<E> iterator() {
         return new SinglyLinkedListIterator<E>();
