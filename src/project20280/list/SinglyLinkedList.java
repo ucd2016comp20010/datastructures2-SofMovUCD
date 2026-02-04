@@ -2,11 +2,13 @@ package project20280.list;
 
 import project20280.interfaces.List;
 
+import java.util.Comparator;
 import java.util.Iterator;
 
-public class SinglyLinkedList<E> implements List<E> {
 
-    private static class Node<E> {
+public class SinglyLinkedList<E extends Comparable<E>> implements List<E> {
+
+    private static class Node<E extends Comparable<E>> implements Comparable<Node<E>> {
 
         private final E element;            // reference to the element stored at this node
 
@@ -58,6 +60,11 @@ public class SinglyLinkedList<E> implements List<E> {
         public void setNext(Node<E> n) {
             // TODO
 	    this.next = n;
+        }
+
+        @Override
+        public int compareTo(Node<E> o){ //make the nodes comparable
+            return element.compareTo(((Node<E>)o).element);
         }
     } //----------- end of nested Node class -----------
 
@@ -208,12 +215,23 @@ public class SinglyLinkedList<E> implements List<E> {
         head = prev;
     }
 
+    public SinglyLinkedList<E> sortedMerge(SinglyLinkedList<E> list2){
+        if(!(list2 instanceof Comparable)){
+            throw new IllegalArgumentException("List contains elements which are not comparable");
+        }
+        Node<E> startOfNewList;
+        int biggestSize = list2.size() > size()? list2.size():size();
+        for(int i = 0; i < biggestSize; i++){
+
+        }
+    }
+
     //@Override
     public Iterator<E> iterator() {
         return new SinglyLinkedListIterator<E>();
     }
 
-    private class SinglyLinkedListIterator<E> implements Iterator<E> {
+    private class SinglyLinkedListIterator<E extends Comparable<E>> implements Iterator<E> {
         Node<E> curr = (Node<E>) head;
 
         @Override
@@ -245,6 +263,8 @@ public class SinglyLinkedList<E> implements List<E> {
     public static void main(String[] args) {
         SinglyLinkedList<Integer> ll = new SinglyLinkedList<Integer>();
         System.out.println("ll " + ll + " isEmpty: " + ll.isEmpty());
+//        int a = 1;
+//        System.out.println("test: " + a.compareTo((Object)2)? "wow": "not wow");
         //LinkedList<Integer> ll = new LinkedList<Integer>();
 
         ll.addFirst(0);
