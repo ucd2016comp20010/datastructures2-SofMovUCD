@@ -118,5 +118,23 @@ class SinglyLinkedListTest {
         ll.addLast(3);
         assertEquals("[1, 2, 3]", ll.toString());
     }
+    @Test
+    void testCopy(){
+        List<Integer> ll = new SinglyLinkedList<Integer>();
+        ll.addLast(1);
+        ll.addLast(2);
+        ll.addLast(3);
+        assertEquals("[1, 2, 3]", ((SinglyLinkedList) ll).copy().toString());
+    }
+
+    @Test
+    void testReverse(){
+        List<Integer> ll = new SinglyLinkedList<Integer>();
+        ll.addLast(1);
+        ll.addLast(2);
+        ll.addLast(3);
+        ((SinglyLinkedList<Integer>) ll).reverse();
+        assertEquals("[3, 2, 1]", ll.toString());
+    }
 
 }
