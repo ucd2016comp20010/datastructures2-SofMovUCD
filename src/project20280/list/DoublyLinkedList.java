@@ -94,8 +94,9 @@ public class DoublyLinkedList<E> implements List<E> {
     @Override
     public void add(int i, E e) {
         // TODO
+        //header is at index -1
         if(i <= 0){
-            //set as the next element after the head and assign pointers correctly
+            //set as the next element after the header and assign pointers correctly
             head.setNext(new Node<>(e,head, head.getNext()));
             size++;
             return;
@@ -205,7 +206,7 @@ public class DoublyLinkedList<E> implements List<E> {
     @Override
     public void addLast(E e) {
         // TODO
-	add(size-1, e);
+	add(size, e);
     }
 
     @Override
