@@ -33,9 +33,9 @@ public class ArrayQueue<E> implements Queue<E> {
     @Override
     public void enqueue(E e) { //add to the end
         // TODO
-        if((size() + front) % CAPACITY == front){
-            throw new RuntimeException("List too full");
-        }
+//        if((size() + front) % CAPACITY == front){
+//            throw new RuntimeException("List too full");
+//        }
         data[(size()+front)% CAPACITY] = e;
         size++;
     }
@@ -50,6 +50,7 @@ public class ArrayQueue<E> implements Queue<E> {
         // TODO
         E s = data[front];
         front = (front + 1) % CAPACITY;
+        size--;
         return s;
     }
 
