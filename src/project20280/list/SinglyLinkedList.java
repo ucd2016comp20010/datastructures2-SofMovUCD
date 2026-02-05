@@ -216,14 +216,35 @@ public class SinglyLinkedList<E extends Comparable<E>> implements List<E> {
     }
 
     public SinglyLinkedList<E> sortedMerge(SinglyLinkedList<E> list2){
-        if(!(list2 instanceof Comparable)){
-            throw new IllegalArgumentException("List contains elements which are not comparable");
-        }
-        Node<E> startOfNewList;
-        int biggestSize = list2.size() > size()? list2.size():size();
-        for(int i = 0; i < biggestSize; i++){
+//        if(!(list2.get(0) instanceof Comparable)|| size() == 0 || list2.size() == 0){
+//            throw new IllegalArgumentException("List contains elements which are not comparable");
+//        }
+        SinglyLinkedList<E> newList = new SinglyLinkedList<>();
+        int otherListIndex = 0;
+        int listIndex = 0;
+        int totalSize = list2.size() + size(); //size of the new linked list
 
+        for(int i = 0; i < totalSize; i++){
+            if(listIndex >= size()){ //one list ended
+                newList.add(i, list2.get(otherListIndex++));
+            }
+            else if(otherListIndex >= list2.size()){ //other list ended
+                newList.add(i, get(listIndex++));
+            }
+            else{
+                //compare the two elements
+                Comparable<? super E> comp1 = (Comparable<? super E>) get(listIndex);
+                Comparable<? super E> comp2 = (Comparable<? super E>) list2.get(otherListIndex);
+
+                if(comp1.compareTo((E) comp2) <= 0){ //current list element is smaller
+                    newList.add(i, get(listIndex++));
+                }
+                else { //other list element is smaller
+                    newList.add(i, list2.get(otherListIndex++));
+                }
+            }
         }
+        return newList;
     }
 
     //@Override
