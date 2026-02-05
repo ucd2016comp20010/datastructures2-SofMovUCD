@@ -6,12 +6,13 @@ public class ArrayQueue<E> implements Queue<E> {
 
     private static final int CAPACITY = 1000;
     private E[] data;
-    private final int front = 0;
-    private final int size = 0;
+    private int front = 0;
+    private int size = 0;
 
+    @SuppressWarnings({"unchecked"})
     public ArrayQueue(int capacity) {
         // TODO
-
+        data = (E[]) new Object[capacity]; //create an empty array
     }
 
     public ArrayQueue() {
@@ -30,8 +31,13 @@ public class ArrayQueue<E> implements Queue<E> {
     }
 
     @Override
-    public void enqueue(E e) {
+    public void enqueue(E e) { //add to the end
         // TODO
+        if((size() + front) % CAPACITY == front){
+            throw new RuntimeException("List too full");
+        }
+        data[(size()+front)% CAPACITY] = e;
+        size++;
     }
 
     @Override
@@ -40,9 +46,11 @@ public class ArrayQueue<E> implements Queue<E> {
     }
 
     @Override
-    public E dequeue() {
+    public E dequeue() { //remove from the start
         // TODO
-        return null;
+        E s = data[front];
+        front = (front + 1) % CAPACITY;
+        return s;
     }
 
     public String toString() {
