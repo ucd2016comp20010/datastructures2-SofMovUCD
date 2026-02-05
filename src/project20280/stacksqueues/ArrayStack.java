@@ -100,6 +100,24 @@ public class ArrayStack<E> implements Stack<E> {
     }
 
     /**
+     * Produce a binary representation of the number given
+     * @param dec_num, the number to be turned into binary
+     * @return string representation of num
+     */
+    public static String convertToBinary(long dec_num){
+        Stack<Integer> s = new ArrayStack<>();
+        while(dec_num != 0){
+            s.push(Math.toIntExact(dec_num % 2));
+            dec_num /= 2;
+        }
+        String represent = "";
+        while(!(s.isEmpty())){
+            represent += s.pop().toString();
+        }
+        return represent;
+    }
+
+    /**
      * Produces a string representation of the contents of the stack.
      * (ordered from top to bottom). This exists for debugging purposes only.
      *
