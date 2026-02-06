@@ -8,6 +8,8 @@ public class LinkedStack<E> implements Stack<E> {
     DoublyLinkedList<E> ll;
 
     public static void main(String[] args) {
+	System.out.println(checkParentheses("()")? "pass":"fail");
+   	System.out.println(checkParentheses("(")? "fail":"pass");
     }
     //top of stack is the head of the linked list
     public LinkedStack() {
@@ -43,7 +45,33 @@ public class LinkedStack<E> implements Stack<E> {
         return ll.removeFirst();
     }
 
+    public static boolean checkParentheses(String in){
+	// TODO
+	LinkedStack<String> ls = new LinkedStack<String>();
+	for(int i = 0; i < in.length(); i++){
+		char lett = in.charAt(i);
+		if(lett == '(' || lett == '{' || lett == '['){
+			ls.push(String.valueOf(lett));
+		}
+		else if(lett == ')' || lett == '}' || lett == ']'){
+			if(lett ==')' && ls.top().equals("(")){
+				ls.pop();
+			}
+			else if(lett == '}' && ls.top().equals("{")){
+				ls.pop();
+			}
+			else if(lett == ']' && ls.top().equals("[")){
+				ls.pop();
+			}
+			else{
+				return false;
+			}
+		}
+	}
+    	return true;
+    }
+
     public String toString() {
-        return ll.toString();
+	return ll.toString();
     }
 }
