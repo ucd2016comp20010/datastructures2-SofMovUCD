@@ -7,8 +7,34 @@ class BracketChecker {
         input = in;
     }
 
-    public void check() {
+    public static boolean check(String input) {
         // TODO
+        LinkedStack<String> ls = new LinkedStack<String>();
+        for(int i = 0; i < input.length(); i++){
+            char lett = input.charAt(i);
+            if(lett == '(' || lett == '{' ||lett == '['){
+                ls.push(String.valueOf(lett));
+            }
+        else if(lett == ')' || lett == '}' || lett == ']'){
+                if(ls.top() == null){
+                    return false;
+                }
+                else if(lett ==')' && ls.top().equals("(")){
+                    ls.pop();
+                }
+                else if(lett == '}' && ls.top().equals("{")){
+                    ls.pop();
+                }
+                else if(lett == ']' && ls.top().equals("[")){
+                    ls.pop();
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+        return ls.isEmpty();
+    }
     }
 
     public static void main(String[] args) {
@@ -22,9 +48,8 @@ class BracketChecker {
         };
 
         for (String input : inputs) {
-            BracketChecker checker = new BracketChecker(input);
+            boolean checker = BracketChecker.check(input);
             System.out.println("checking: " + input);
-            checker.check();
+            System.out.println(checker? "yes ":"no ");
         }
     }
-}
