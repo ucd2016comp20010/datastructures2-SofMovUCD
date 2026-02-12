@@ -1,6 +1,7 @@
 package project20280.tree;
 
 import project20280.interfaces.Position;
+import project20280.list.SinglyLinkedList;
 
 import java.util.ArrayList;
 //import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
@@ -154,7 +155,13 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     public Position<E> addRoot(E e) throws IllegalStateException {
         // TODO
-        return null;
+        if(isEmpty()){
+            root = new Node<E>(e, null, null, null);
+            return root;
+        }
+        else{
+            throw new IllegalStateException();
+        }
     }
 
     public void insert(E e) {
