@@ -10,32 +10,27 @@ class BracketChecker {
     public static boolean check(String input) {
         // TODO
         LinkedStack<String> ls = new LinkedStack<String>();
-        for(int i = 0; i < input.length(); i++){
+        for (int i = 0; i < input.length(); i++) {
             char lett = input.charAt(i);
-            if(lett == '(' || lett == '{' ||lett == '['){
+            if (lett == '(' || lett == '{' || lett == '[') {
                 ls.push(String.valueOf(lett));
-            }
-        else if(lett == ')' || lett == '}' || lett == ']'){
-                if(ls.top() == null){
+            } else if (lett == ')' || lett == '}' || lett == ']') {
+                if (ls.top() == null) {
                     return false;
-                }
-                else if(lett ==')' && ls.top().equals("(")){
+                } else if (lett == ')' && ls.top().equals("(")) {
                     ls.pop();
-                }
-                else if(lett == '}' && ls.top().equals("{")){
+                } else if (lett == '}' && ls.top().equals("{")) {
                     ls.pop();
-                }
-                else if(lett == ']' && ls.top().equals("[")){
+                } else if (lett == ']' && ls.top().equals("[")) {
                     ls.pop();
-                }
-                else{
+                } else {
                     return false;
                 }
             }
         }
         return ls.isEmpty();
     }
-    }
+
 
     public static void main(String[] args) {
         String[] inputs = {
@@ -50,6 +45,7 @@ class BracketChecker {
         for (String input : inputs) {
             boolean checker = BracketChecker.check(input);
             System.out.println("checking: " + input);
-            System.out.println(checker? "yes ":"no ");
+            System.out.println(checker ? "yes " : "no ");
         }
     }
+}
