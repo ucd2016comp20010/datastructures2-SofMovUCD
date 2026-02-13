@@ -155,7 +155,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     public Position<E> addRoot(E e) throws IllegalStateException {
         // TODO
         if(isEmpty()){
-                root = new Node(e, null, null, null);
+            root = new Node(e, null, null, null);
             size++;
             return (Position<E>) root;
         }
@@ -212,7 +212,17 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     public Position<E> addRight(Position<E> p, E e) throws IllegalArgumentException {
         // TODO
-        return null;
+        Position<E> rightNode = null;
+        for (Position<E> pos : positions()) {
+            if (pos == p) { //p contained within tree
+                if (right(p) == null) {
+                    throw new IllegalArgumentException();
+                } else {
+                    rightNode = new Node<E>(e, (Node<E>) p, (Node<E>) left(p), (Node<E>) right(p));
+                }
+            }
+        }
+        return rightNode;
     }
 
     /**
