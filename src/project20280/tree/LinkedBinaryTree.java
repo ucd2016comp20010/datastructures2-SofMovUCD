@@ -154,14 +154,14 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     public Position<E> addRoot(E e) throws IllegalStateException {
         // TODO
-	if(isEmpty()){
-	       	root = new Node(e, null, null, null);
-		size++;
-		return (Position<E>) root;
-	}
-	else{
-		throw new IllegalStateException();
-	}
+        if(isEmpty()){
+                root = new Node(e, null, null, null);
+            size++;
+            return (Position<E>) root;
+        }
+        else{
+            throw new IllegalStateException();
+        }
     }
 
    //public void insert(E e) {
