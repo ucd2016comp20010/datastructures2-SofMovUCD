@@ -262,6 +262,10 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     public void attach(Position<E> p, LinkedBinaryTree<E> t1, LinkedBinaryTree<E> t2) throws IllegalArgumentException {
         // TODO
+	Node<E> currPos = root
+	while(!found){
+
+	}
     }
 
     /**
