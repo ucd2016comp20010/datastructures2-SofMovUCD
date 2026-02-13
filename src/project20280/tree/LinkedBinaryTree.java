@@ -187,7 +187,17 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     public Position<E> addLeft(Position<E> p, E e) throws IllegalArgumentException {
         // TODO
-        return null;
+        Position<E> leftNode = null;
+        for (Position<E> pos : positions()) {
+            if (pos == p) { //p contained within tree
+                if (left(p) == null) {
+                    throw new IllegalArgumentException();
+                } else {
+                    leftNode = new Node<E>(e, (Node<E>) p, (Node<E>) left(p), (Node<E>) right(p));
+                }
+            }
+        }
+        return leftNode;
     }
 
     /**
