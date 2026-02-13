@@ -282,7 +282,12 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     public E remove(Position<E> p) throws IllegalArgumentException {
         // TODO
-        return null;
+        validate(p);
+        E removed = p.getElement();
+        if(left(p) != null && right(p) != null) throw new IllegalArgumentException();
+        ((Node<E>)parent(p)).setLeft(((Node<E>)left(p)));
+        ((Node<E>)parent(p)).setRight(((Node<E>)right(p)));
+        return removed;
     }
 
     public String toString() {
