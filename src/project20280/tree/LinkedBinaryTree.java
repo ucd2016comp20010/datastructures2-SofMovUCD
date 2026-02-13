@@ -236,7 +236,14 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     public E set(Position<E> p, E e) throws IllegalArgumentException {
         // TODO
-        return null;
+        E value = null;
+        for (Position<E> pos : positions()) {
+            if (pos == p) { //p contained within tree
+                value = p.getElement();
+                p = new Node<E>(e, (Node<E>) parent(p), (Node<E>) left(p), (Node<E>) right(p));
+            }
+        }
+        return value;
     }
 
     /**
