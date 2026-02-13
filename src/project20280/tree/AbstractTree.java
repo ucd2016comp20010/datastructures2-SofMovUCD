@@ -63,7 +63,8 @@ public abstract class AbstractTree<E> implements Tree<E> {
     @Override
     public boolean isRoot(Position<E> p) {
         // TODO
-        return false;
+        if(isEmpty()) return false;
+        return p == root();
     }
 
     /**
