@@ -154,19 +154,26 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     public Position<E> addRoot(E e) throws IllegalStateException {
         // TODO
-        return null;
+	if(isEmpty()){
+	       	root = new Node(e, null, null, null);
+		size++;
+		return (Position<E>) root;
+	}
+	else{
+		throw new IllegalStateException();
+	}
     }
 
-    public void insert(E e) {
+   //public void insert(E e) {
         // TODO
 
-    }
+    //}
 
     // recursively add Nodes to binary tree in proper position
-    private Node<E> addRecursive(Node<E> p, E e) {
+    //private Node<E> addRecursive(Node<E> p, E e) {
         // TODO
-        return null;
-    }
+        //return null;
+    //}
 
     /**
      * Creates a new left child of Position p storing element e and returns its
@@ -180,7 +187,9 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     public Position<E> addLeft(Position<E> p, E e) throws IllegalArgumentException {
         // TODO
-        return null;
+	if(isEmpty()) return null;
+	Node<E> newLeft = new Node<E>(e, p.getLeft(), p.getRight(), p); 
+        return newLeft;
     }
 
     /**
