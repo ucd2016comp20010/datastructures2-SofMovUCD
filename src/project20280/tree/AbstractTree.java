@@ -202,6 +202,17 @@ public abstract class AbstractTree<E> implements Tree<E> {
      */
     private void preorderSubtree(Position<E> p, List<Position<E>> snapshot) {
         // TODO
+        boolean found = false;
+        for (Position<E> pos : positions()){
+            if(pos == p){
+                snapshot.addLast(p);
+                found = true;
+            }
+            else if(found){
+                snapshot.addLast(p); //keep adding the rest of the p subtree
+            }
+        }
+
     }
 
     /**
