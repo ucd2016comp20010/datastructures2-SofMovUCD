@@ -1,7 +1,6 @@
 package project20280.tree;
 
 import project20280.interfaces.Position;
-import project20280.list.SinglyLinkedList;
 
 import java.util.ArrayList;
 //import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
@@ -155,25 +154,26 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     public Position<E> addRoot(E e) throws IllegalStateException {
         // TODO
-        if(isEmpty()){
-            root = new Node<E>(e, null, null, null);
-            return root;
-        }
-        else{
-            throw new IllegalStateException();
-        }
+	if(isEmpty()){
+	       	root = new Node(e, null, null, null);
+		size++;
+		return (Position<E>) root;
+	}
+	else{
+		throw new IllegalStateException();
+	}
     }
 
-    public void insert(E e) {
+   //public void insert(E e) {
         // TODO
 
-    }
+    //}
 
     // recursively add Nodes to binary tree in proper position
-    private Node<E> addRecursive(Node<E> p, E e) {
+    //private Node<E> addRecursive(Node<E> p, E e) {
         // TODO
-        return null;
-    }
+        //return null;
+    //}
 
     /**
      * Creates a new left child of Position p storing element e and returns its
