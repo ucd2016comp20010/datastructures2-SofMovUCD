@@ -25,7 +25,8 @@ public abstract class AbstractBinaryTree<E> extends AbstractTree<E>
     @Override
     public Position<E> sibling(Position<E> p) {
         // TODO
-        return null;
+        if(parent(p) == null) throw new IllegalArgumentException();
+        return left(parent(p)) == p? right(parent(p)) : left(parent(p));
     }
 
     /**
