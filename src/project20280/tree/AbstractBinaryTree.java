@@ -39,7 +39,10 @@ public abstract class AbstractBinaryTree<E> extends AbstractTree<E>
     @Override
     public int numChildren(Position<E> p) {
         // TODO
-        return 0;
+        int num = 0;
+        if(left(p) != null) num++;
+        if(right(p) != null) num++;
+        return num;
     }
 
     /**
