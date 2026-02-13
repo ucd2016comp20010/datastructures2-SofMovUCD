@@ -28,7 +28,12 @@ public abstract class AbstractTree<E> implements Tree<E> {
     @Override
     public boolean isInternal(Position<E> p) {
         // TODO
-        return false;
+        for (Position<E> pos : positions()){
+            if(pos == p){ //verified p is a valid member of the tree
+                return numChildren(p) > 0;
+            }
+        }
+        throw new IllegalArgumentException();
     }
 
     /**
@@ -66,7 +71,9 @@ public abstract class AbstractTree<E> implements Tree<E> {
     @Override
     public int numChildren(Position<E> p) {
         // TODO
-        return 0;
+        int count = 0;
+        for(Position<E> pos : children(p)) count++;
+        return count;
     }
 
     /**
