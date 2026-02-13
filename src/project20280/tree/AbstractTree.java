@@ -202,14 +202,12 @@ public abstract class AbstractTree<E> implements Tree<E> {
      */
     private void preorderSubtree(Position<E> p, List<Position<E>> snapshot) {
         // TODO
-        boolean found = false;
-        for (Position<E> pos : positions()){
-            if(pos == p){
-                snapshot.addLast(p);
-                found = true;
-            }
-            else if(found){
-                snapshot.addLast(p); //keep adding the rest of the p subtree
+        for(Position<E> pos: positions()){
+            if(numChildren(p) > 0){
+                for(Position<E> childPos: children(p)) {
+                    snapshot.addLast(childPos); //add children after traversing all the leftmost children
+                    preorderSubtree(childPos, snapshot); //continue through all children
+                }
             }
         }
 
@@ -222,7 +220,10 @@ public abstract class AbstractTree<E> implements Tree<E> {
      */
     public Iterable<Position<E>> preorder() {
         // TODO
-        return null;
+        List<Position<E>> snapshot = new ArrayList<>();
+        if (!isEmpty())
+            preorderSubtree(root(), snapshot);   // fill the snapshot recursively
+        return snapshot;
     }
 
     /**
