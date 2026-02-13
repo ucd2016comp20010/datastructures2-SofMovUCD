@@ -189,6 +189,9 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         // TODO
 	if(isEmpty()) return null;
 	Node<E> newLeft = new Node<E>(e, p.getLeft(), p.getRight(), p); 
+	if(p.getLeft() != null) p.getLeft().setParent(newLeft);
+	if(p.getRight() != null) p.getRight().setParent(newLeft);
+	p.setLeft(newLeft);
         return newLeft;
     }
 
@@ -204,7 +207,12 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     public Position<E> addRight(Position<E> p, E e) throws IllegalArgumentException {
         // TODO
-        return null;
+	if(isEmpty()) return null;
+        Node<E> newRight = new Node<E>(e, p.getLeft(), p.getRight(), p);
+        if(p.getLeft() != null) p.getLeft().setParent(newRight);
+        if(p.getRight() != null) p.getRight().setParent(newRight);
+        p.setRight(newRight);
+        return newRight;
     }
 
     /**
@@ -218,6 +226,27 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     public E set(Position<E> p, E e) throws IllegalArgumentException {
         // TODO
+	if(isEmpty()){
+		throw new IllegalArgumentException();
+	}
+	//find position p
+	Node<E> currPos = root;
+	boolean allLeft = false; //travelled all lefts in tree
+	while(currPos != p){
+		if(!allLeft && currPos.getLeft() != null){
+			currPos = currPos.getLeft();
+		}
+		if(currPos.getLeft() == null){
+			allLeft = true;
+		}
+		else if(currPos.getRight() != null){
+			currPos = currPos.getRight();
+		}
+		else{
+			currPos = currPos.getParent();
+			allLeft = false;
+		}
+	}
         return null;
     }
 
