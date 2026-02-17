@@ -138,8 +138,11 @@ public abstract class AbstractTree<E> implements Tree<E> {
 
     public int height_recursive(Position<E> p) {
         // TODO
-        if(parent(p) == null) return 1; //gotten to root
-        else return 1 + height_recursive(parent(p));
+        int height = 0;
+        for(Position<E> pos : children(p)){
+            height = Math.max(height, 1+height_recursive(pos));
+        }
+        return height;
     }
 
     /**
