@@ -166,7 +166,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     public Position<E> addRoot(E e) throws IllegalStateException {
         // TODO
         if(isEmpty()){
-            root = new Node(e, null, null, null);
+            root = new Node<E>(e, null, null, null);
             size++;
             return (Position<E>) root;
         }
@@ -276,6 +276,10 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         validate(p);
         E removed = p.getElement();
         if(left(p) != null && right(p) != null) throw new IllegalArgumentException();
+        if(root() == p){
+            root = left(p) == null? (Node<E>)right(p): (Node<E>)left(p);
+            return removed;
+        }
         ((Node<E>)parent(p)).setLeft(((Node<E>)left(p)));
         ((Node<E>)parent(p)).setRight(((Node<E>)right(p)));
         return removed;
@@ -317,9 +321,9 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     private Node<E> createLevelOrderHelper(E[] arr, Node<E> p, int i) {
         // TODO
         if (i < arr.length) {
-            Node<E> n = createNode(arr[i], p, null, null);
-            n.left = createLevelOrderHelper(arr, n.left, 2*i + 1);
-            n.right = createLevelOrderHelper(arr, n.right, 2*i + 2);
+            Node<E> n = new Node<E>(arr[i], p, null, null);
+            n.left = createLevelOrderHelper(arr, n.left, 2 * i + 1);
+            n.right = createLevelOrderHelper(arr, n.right, 2 * i + 2);
             size++;
             return n;
         }
