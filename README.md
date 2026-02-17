@@ -49,4 +49,16 @@ Q3: Describe an algorithm which counts only the left external
 nodes in a binary tree. \
 only add 1 if both the leaf is external and left(parent(thisNode)) == thisNode returns true
 
-Q4:
+Q4: \
+Preorder: \
+   E \
+  X F \
+A M U N \
+Postorder: \
+   N \
+  A U \
+E X M F \
+Inorder: \
+   M \
+  X F \
+E A U N
