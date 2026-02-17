@@ -403,4 +403,12 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         if(isEmpty()) throw new IllegalArgumentException();
         return height_recursive(root.getLeft()) + height_recursive(root.getRight());
     }
+
+    public int extNodeCount(Node<E> root){
+        if (isExternal(root)) {
+            return 1;
+        } else {
+            return extNodeCount(root.getLeft()) + extNodeCount(root.getRight());
+        }
+    }
 }
