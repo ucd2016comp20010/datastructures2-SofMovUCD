@@ -32,7 +32,7 @@ class LinkedBinaryTreeTest {
     void testAddLeft() {
         LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
 
-        Integer c = Integer.parseInt("0");
+        Integer c = 0;
         bt.addRoot(c);
         bt.addLeft(bt.root(), 1);
         assertEquals(1, bt.left(bt.root()).getElement());
