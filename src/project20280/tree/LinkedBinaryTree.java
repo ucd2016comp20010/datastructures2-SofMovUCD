@@ -187,17 +187,10 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     public Position<E> addLeft(Position<E> p, E e) throws IllegalArgumentException {
         // TODO
-        Position<E> leftNode = null;
-        for (Position<E> pos : positions()) {
-            if (pos == p) { //p contained within tree
-                if (left(p) == null) {
-                    throw new IllegalArgumentException();
-                } else {
-                    leftNode = new Node<E>(e, (Node<E>) p, (Node<E>) left(p), (Node<E>) right(p));
-                }
-            }
-        }
-        return leftNode;
+        validate(p);
+        Node<E> leftnode = new Node<E>(e, (Node<E>) p, (Node<E>) left(p), (Node<E>) right(p));
+        ((Node<E>) p).setLeft(leftnode);
+        return leftnode;
     }
 
     /**
@@ -212,17 +205,10 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     public Position<E> addRight(Position<E> p, E e) throws IllegalArgumentException {
         // TODO
-        Position<E> rightNode = null;
-        for (Position<E> pos : positions()) {
-            if (pos == p) { //p contained within tree
-                if (right(p) == null) {
-                    throw new IllegalArgumentException();
-                } else {
-                    rightNode = new Node<E>(e, (Node<E>) p, (Node<E>) left(p), (Node<E>) right(p));
-                }
-            }
-        }
-        return rightNode;
+        validate(p);
+        Node<E> rightnode = new Node<E>(e, (Node<E>) p, (Node<E>) left(p), (Node<E>) right(p));
+        ((Node<E>) p).setRight(rightnode);
+        return rightnode;
     }
 
     /**
