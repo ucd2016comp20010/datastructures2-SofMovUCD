@@ -222,13 +222,10 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     public E set(Position<E> p, E e) throws IllegalArgumentException {
         // TODO
-        E value = null;
-        for (Position<E> pos : positions()) {
-            if (pos == p) { //p contained within tree
-                value = p.getElement();
-                p = new Node<E>(e, (Node<E>) parent(p), (Node<E>) left(p), (Node<E>) right(p));
-            }
-        }
+        validate(p);
+        E value = p.getElement();
+        p = new Node<E>(e, (Node<E>) parent(p), (Node<E>) left(p), (Node<E>) right(p));
+
         return value;
     }
 
@@ -244,17 +241,12 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     public void attach(Position<E> p, LinkedBinaryTree<E> t1, LinkedBinaryTree<E> t2) throws IllegalArgumentException {
         // TODO
-        for (Position<E> pos : positions()) {
-            if (pos == p) { //p contained within tree
-                if(left(p) != null || right(p) != null){
-                    throw new IllegalArgumentException();
-                }
-                else{
-                    ((Node<E>) p).setLeft(((Node<E>)t1.root()));
-                    ((Node<E>) p).setRight(((Node<E>)t2.root()));
-                    return;
-                }
-            }
+        validate(p);
+        if (left(p) != null || right(p) != null) { //p isn't a leaf
+            throw new IllegalArgumentException();
+        } else {
+            ((Node<E>) p).setLeft(((Node<E>) t1.root()));
+            ((Node<E>) p).setRight(((Node<E>) t2.root()));
         }
     }
 
