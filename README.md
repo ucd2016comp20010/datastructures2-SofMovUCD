@@ -43,4 +43,10 @@ extNodeCount(Node<E\> root){ \
 if external \
 return 1 \
 else \
-return extNodeCount(leftChild) + extNodeCount(rightChild)
+return extNodeCount(leftChild) + extNodeCount(rightChild) 
+
+Q3: Describe an algorithm which counts only the left external
+nodes in a binary tree. \
+only add 1 if both the leaf is external and left(parent(thisNode)) == thisNode returns true
+
+Q4:
