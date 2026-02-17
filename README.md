@@ -62,3 +62,10 @@ Inorder: \
    M \
   X F \
 E A U N
+
+Q5: Write the pseudocode for an algorithm which counts the total number of descendants of
+a node \
+public int countDesc(Node<E\> node){ \
+    if(node != null) return 1 + countDesc(node.getLeft()) + countDesc(node.getRight()); \
+    else return 0; \
+}
