@@ -115,13 +115,12 @@ public abstract class AbstractTree<E> implements Tree<E> {
     public int depth(Position<E> p) throws IllegalArgumentException {
         // TODO
         if(isEmpty()) throw new IllegalArgumentException();
-        int heightTree = heightBad();
-        for(int i = 0; i < heightTree; i++){
-            if(parent(p) == null && root() != p) throw new IllegalArgumentException();
-            if(root() == p) return heightTree - i; //how far we have gone up before reaching root
+        int depth = 0;
+        while (!isRoot(p)){
             p = parent(p);
+            depth++;
         }
-        return 0;
+        return depth;
     }
 
     /**
