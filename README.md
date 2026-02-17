@@ -37,4 +37,10 @@ divide by the given base and store remainder in stack \
 at the end pop off each element (they are now in the correct order) \
 For bases greater than 9, use characters, if remainder is larger than 9
 
-Q5: 
+### Week 3(trees)
+Q2: Write pseudocode to count the number of external nodes in a binary tree.
+extNodeCount(Node<E\> root){ \
+if external \
+return 1 \
+else \
+return extNodeCount(leftChild) + extNodeCount(rightChild)
