@@ -3,6 +3,8 @@ package project20280.tree;
 import org.junit.jupiter.api.Test;
 import project20280.interfaces.Position;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LinkedBinaryTreeTest {
@@ -42,7 +44,7 @@ class LinkedBinaryTreeTest {
     void testAddRight() {
         LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
 
-        Integer c = Integer.parseInt("0");
+        Integer c = 0;
         bt.addRoot(c);
         bt.addRight(bt.root(), 1);
         assertEquals(1, bt.right(bt.root()).getElement());
@@ -52,7 +54,7 @@ class LinkedBinaryTreeTest {
     void testRemove() {
         LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<Integer>();
 
-        Integer c = Integer.parseInt("0");
+        Integer c = 0;
         bt.addRoot(c);
         bt.addRight(bt.root(), 1);
         Integer old = bt.remove(bt.right(bt.root()));
