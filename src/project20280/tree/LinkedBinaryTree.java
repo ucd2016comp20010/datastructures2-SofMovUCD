@@ -393,4 +393,14 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
             return sb.toString();
         }
     }
+
+    /*
+    * Function to calculate diameter
+    * @return length of diameter
+    * @throws IllegalArgumentException if tree is empty
+    * */
+    public int diameter(){
+        if(isEmpty()) throw new IllegalArgumentException();
+        return height_recursive(root.getLeft()) + height_recursive(root.getRight());
+    }
 }
