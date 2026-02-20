@@ -411,4 +411,52 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
             return extNodeCount(root.getLeft()) + extNodeCount(root.getRight());
         }
     }
+
+    // construct a binary tree from two given traversals
+    public void construct(Node<E>[] inorder, Node<E>[] preorder){
+	//construct leftmost branch of tree using preorder until reached first element in inorder
+	//then go up until next parent and next element of inorder are not the same (add right child)
+	LinkedBinaryTree<E> myTree = new LinkedBinaryTree<E>();
+	myTree.addRoot(preorder[0]);
+	int i = 1;
+	Node<E> parentNode = root;
+	while(preorder[i] != inorder[0]){ //add all left elements on left side of the tree
+		myTree.addLeft(preorder[i++], parentNode);
+		parentNode = left(parentNode);
+	}
+	int j = 1;
+	while(preorder[0] != inorder[j]){ //add all right elements on the left side of the tree
+		if(myTree.contains(inorder[j])){
+			myTree.addRight(inorder[j++], parentNode);
+			parentNode = right(parentNode);
+			i++;
+		}
+		else{
+			parentNode = parent(parentNode);
+		}
+	}
+
+	parentNode = myTree.root(); //go back to the root
+	myTree.addRight(preorder[i++], parentNode); //add the first right
+
+       while(preorder[i] != inorder[j]){ //add all left elements on right side of the tree
+                myTree.addLeft(preorder[i++], parentNode);
+                parentNode = left(parentNode);
+        }
+
+        while(preorder[i] != inorder[j]){ //add all right elements on the right side of the tree
+                if(!myTree.contains(inorder[j])){
+                        myTree.addRight(inorder[j++], parentNode);
+                        parentNode = right(parentNode);
+                        i++;
+                }
+                else{
+                        parentNode = parent(parentNode);
+			j++;
+                }
+        }
+
+
+
+    }
 }
