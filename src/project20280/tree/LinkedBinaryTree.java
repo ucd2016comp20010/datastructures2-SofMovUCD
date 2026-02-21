@@ -459,4 +459,10 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
 
     }
+
+    public E[][] rootToLeafPaths(){
+	//start at root and go down (starting from all left)
+	//
+
+    } 
 }
