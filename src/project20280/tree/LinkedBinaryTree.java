@@ -408,7 +408,15 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     * */
     public int diameter(){
         if(isEmpty()) throw new IllegalArgumentException();
-        return height_recursive(root.getLeft()) + height_recursive(root.getRight());
+        int maxDiam = 0;
+        int newDiam;
+        for(Position<E> startingPoint : positions()){
+            if(((Node<E>) startingPoint).left != null && ((Node<E>) startingPoint).right != null){
+                newDiam = height_recursive(((Node<E>)startingPoint).getLeft()) + height_recursive(((Node<E>)startingPoint).getRight());
+                maxDiam = maxDiam > newDiam? maxDiam: newDiam;
+            }
+        }
+        return maxDiam;
     }
 
     public int extNodeCount(Node<E> root){
