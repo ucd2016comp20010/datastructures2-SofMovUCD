@@ -69,3 +69,9 @@ public int countDesc(Node<E\> node){ \
     if(node != null) return 1 + countDesc(node.getLeft()) + countDesc(node.getRight()); \
     else return 0; \
 }
+
+### Week 4 (trees II)
+Question 5: \
+go through all the interal nodes, finding the height of the children, \
+adding them and seeing which 2 heights are the largest until you have  \
+gone through all the internal nodes  
