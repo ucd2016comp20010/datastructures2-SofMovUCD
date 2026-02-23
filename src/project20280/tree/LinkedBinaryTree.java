@@ -459,9 +459,25 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         return newRoot;
     }
 
-    public E[][] rootToLeafPaths(){
-	//start at root and go down (starting from all left)
-	//
-        return null;
-    } 
+    public ArrayList<ArrayList<E>> rootToLeafPaths(){
+        ArrayList<ArrayList<E>> allPaths = new ArrayList<>();
+        ArrayList<E> path = new ArrayList<>();
+        pathFinderRecursive(root, allPaths, path);
+        return allPaths;
+    }
+
+    private void pathFinderRecursive(Node<E> r, ArrayList<ArrayList<E>> ap, ArrayList<E> p){
+        if(r == null) return; //element does not exist
+
+        p.add(r.getElement()); //add item to list
+
+        if(r.left == null && r.right == null){ //leaf so end of path reached
+            ap.add(new ArrayList<>(p));
+        } else { //search both subtrees if exist
+            pathFinderRecursive(r.left, ap, p); //look through left subtree
+            pathFinderRecursive(r.right, ap, p); //look through right subtree
+        }
+
+        p.removeLast();
+    }
 }
