@@ -59,6 +59,13 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         String[] arr = { "A", "B", "C", "D", "E", null, "F", null, null, "G", "H", null, null, null, null };
         bt.createLevelOrder(arr);
         System.out.println(bt.toBinaryTreeString());
+        Integer [] inorder= {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
+        Integer [] preorder= {18, 2, 1, 14, 13, 12, 4, 3, 9, 6, 5, 8, 7, 10, 11, 15, 16, 17, 28, 23, 19, 22, 20, 21, 24, 27, 26, 25, 29, 30};
+
+        LinkedBinaryTree<Integer> bt2 = new LinkedBinaryTree<>();
+        bt2.construct(inorder, preorder);
+        System.out.println(bt2.root());
+        System.out.println(bt2.toBinaryTreeString());
     }
 
 
@@ -413,56 +420,48 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     }
 
     // construct a binary tree from two given traversals
-    public void construct(Node<E>[] inorder, Node<E>[] preorder){
-	//construct leftmost branch of tree using preorder until reached first element in inorder
-	//then go up until next parent and next element of inorder are not the same (add right child)
-	LinkedBinaryTree<E> myTree = new LinkedBinaryTree<E>();
-	myTree.addRoot(preorder[0]);
-	int i = 1;
-	Node<E> parentNode = root;
-	while(preorder[i] != inorder[0]){ //add all left elements on left side of the tree
-		myTree.addLeft(preorder[i++], parentNode);
-		parentNode = left(parentNode);
-	}
-	int j = 1;
-	while(preorder[0] != inorder[j]){ //add all right elements on the left side of the tree
-		if(myTree.contains(inorder[j])){
-			myTree.addRight(inorder[j++], parentNode);
-			parentNode = right(parentNode);
-			i++;
-		}
-		else{
-			parentNode = parent(parentNode);
-		}
-	}
+    public void construct(E[] inorder, E[] preorder){
+        if(inorder.length != preorder.length || inorder.length == 0){
+            return;
+        }
+        int[] preIndex = {0};
+        root = betterConstruct(inorder, preorder, preIndex, 0, preorder.length - 1);
+    }
 
-	parentNode = myTree.root(); //go back to the root
-	myTree.addRight(preorder[i++], parentNode); //add the first right
-
-       while(preorder[i] != inorder[j]){ //add all left elements on right side of the tree
-                myTree.addLeft(preorder[i++], parentNode);
-                parentNode = left(parentNode);
+    private Node<E> betterConstruct(E[] inorder, E[] preorder, int[] preIndex, int leftIndex, int rightIndex){
+        if(leftIndex > rightIndex){
+            return null;
         }
 
-        while(preorder[i] != inorder[j]){ //add all right elements on the right side of the tree
-                if(!myTree.contains(inorder[j])){
-                        myTree.addRight(inorder[j++], parentNode);
-                        parentNode = right(parentNode);
-                        i++;
-                }
-                else{
-                        parentNode = parent(parentNode);
-			j++;
-                }
+        E newE = preorder[preIndex[0]];
+        Node<E> newRoot = new Node<>(newE, null, null, null);
+        preIndex[0]++;
+        if (leftIndex == rightIndex) return newRoot;
+
+        int foundI = -1;
+        for(int i = leftIndex; i <= rightIndex; i++){
+            if(inorder[i] == newE){
+                foundI = i;
+                break;
+            }
         }
+        //create a left and right subtree
+        newRoot.left = betterConstruct(inorder, preorder, preIndex, leftIndex, foundI -1);
+        newRoot.right = betterConstruct(inorder, preorder, preIndex, foundI + 1,  rightIndex);
 
-
-
+        //add parents
+        if(newRoot.left != null){
+            newRoot.left.setParent(newRoot);
+        }
+        if(newRoot.right != null){
+            newRoot.right.setParent(newRoot);
+        }
+        return newRoot;
     }
 
     public E[][] rootToLeafPaths(){
 	//start at root and go down (starting from all left)
 	//
-
+        return null;
     } 
 }
