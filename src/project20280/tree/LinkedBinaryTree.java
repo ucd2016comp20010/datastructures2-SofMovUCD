@@ -411,8 +411,9 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         int maxDiam = 0;
         int newDiam;
         for(Position<E> startingPoint : positions()){
+            //add 3 because height doesn't count starting nodes or mutual parent node
             if(((Node<E>) startingPoint).left != null && ((Node<E>) startingPoint).right != null){
-                newDiam = height_recursive(((Node<E>)startingPoint).getLeft()) + height_recursive(((Node<E>)startingPoint).getRight());
+                newDiam = 3 + height_recursive(((Node<E>)startingPoint).getLeft()) + height_recursive(((Node<E>)startingPoint).getRight());
                 maxDiam = Math.max(maxDiam, newDiam);
             }
         }
