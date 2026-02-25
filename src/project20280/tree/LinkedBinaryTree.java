@@ -2,6 +2,9 @@ package project20280.tree;
 
 import project20280.interfaces.Position;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 //import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
@@ -54,7 +57,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     // accessor methods (not already implemented in AbstractBinaryTree)
 
-    public static void main(String [] args) {
+    public static void main(String [] args) throws FileNotFoundException, UnsupportedEncodingException {
         LinkedBinaryTree<String> bt = new LinkedBinaryTree<>();
         String[] arr = { "A", "B", "C", "D", "E", null, "F", null, null, "G", "H", null, null, null, null };
         bt.createLevelOrder(arr);
@@ -492,19 +495,23 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
         p.removeLast();
     }
-    public static void avHiBinTree(){
-        int tHeight = 0;
+    public static void avHiBinTree() throws FileNotFoundException, UnsupportedEncodingException {
+        int tHeight = 0; //total height at each iteration
+        PrintWriter writer = new PrintWriter("averageHeightOfLinkedBinaryTree.csv", "UTF-8"); //helper to write to file
+        LinkedBinaryTree<Integer> lbt = LinkedBinaryTree.makeRandom(0);
         for(int i = 50; i <= 5000; i += 50){
 
             //generate 100 random binary trees
             for(int j = 0; j < 100; j++){
-                LinkedBinaryTree<Integer> lbt = LinkedBinaryTree.makeRandom(i);
+                lbt = LinkedBinaryTree.makeRandom(i);
+                System.out.println();
                 //get total height
                 tHeight += lbt.height();
             }
+            writer.println(i+", "+((double)tHeight/100));
             System.out.println("number of nodes: "+i+", average height: "+((double)tHeight/100));
-            //get average height
-            //print it out
+            tHeight = 0;
         }
+        writer.close();
     }
 }
