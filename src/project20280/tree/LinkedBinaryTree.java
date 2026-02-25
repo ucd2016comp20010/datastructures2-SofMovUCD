@@ -66,6 +66,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         bt2.construct(inorder, preorder);
         System.out.println(bt2.root());
         System.out.println(bt2.toBinaryTreeString());
+        avHiBinTree();
     }
 
 
@@ -490,5 +491,20 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         }
 
         p.removeLast();
+    }
+    public static void avHiBinTree(){
+        int tHeight = 0;
+        for(int i = 50; i <= 5000; i += 50){
+
+            //generate 100 random binary trees
+            for(int j = 0; j < 100; j++){
+                LinkedBinaryTree<Integer> lbt = LinkedBinaryTree.makeRandom(i);
+                //get total height
+                tHeight += lbt.height();
+            }
+            System.out.println("number of nodes: "+i+", average height: "+((double)tHeight/100));
+            //get average height
+            //print it out
+        }
     }
 }
