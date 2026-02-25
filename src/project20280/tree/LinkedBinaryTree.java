@@ -457,12 +457,14 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         newRoot.left = betterConstruct(inorder, preorder, preIndex, leftIndex, foundI -1);
         newRoot.right = betterConstruct(inorder, preorder, preIndex, foundI + 1,  rightIndex);
 
-        //add parents
+        //add parents and update size
         if(newRoot.left != null){
             newRoot.left.setParent(newRoot);
+            size++;
         }
         if(newRoot.right != null){
             newRoot.right.setParent(newRoot);
+            size++;
         }
         return newRoot;
     }
