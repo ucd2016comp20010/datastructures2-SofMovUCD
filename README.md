@@ -78,4 +78,7 @@ gone through all the internal nodes
 
 ### Week 5 (recursion)
 Question 4: What kind of recursive function is this? \
-nested recursion (function is called within a function call)
+nested recursion (function is called within a function call) 
+
+Question 5: What is the output of Foo(2468)? \
+100110100100
