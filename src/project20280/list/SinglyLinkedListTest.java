@@ -152,4 +152,21 @@ class SinglyLinkedListTest {
         assertEquals("[1, 2, 3, 10, 20, 30]", llMerged.toString());
     }
 
+    @Test
+    void testReverseRecur(){
+        SinglyLinkedList<Integer> ll = new SinglyLinkedList<Integer>();
+        ll.addLast(1);
+        ll.addLast(2);
+        ll.addLast(3);
+
+        SinglyLinkedList<Integer> ll2 = new SinglyLinkedList<Integer>();
+        ll2.addLast(10);
+        ll2.addLast(20);
+        ll2.addLast(30);
+
+        ll.reverseRecur();
+
+        assertEquals("[3, 2, 1]", ll.toString());
+    }
+
 }
