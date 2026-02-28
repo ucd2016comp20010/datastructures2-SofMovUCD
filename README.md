@@ -74,4 +74,8 @@ public int countDesc(Node<E\> node){ \
 Question 5: \
 go through all the interal nodes, finding the height of the children, \
 adding them and seeing which 2 heights are the largest until you have  \
-gone through all the internal nodes  
+gone through all the internal nodes
+
+### Week 5 (recursion)
+Question 4: What kind of recursive function is this? \
+nested recursion (function is called within a function call)
