@@ -203,6 +203,19 @@ public class SinglyLinkedList<E extends Comparable<E>> implements List<E> {
         }
         head = prev;
     }
+    public void reverseRecur(){
+        actualReverseRecur(head);
+    }
+    private Node<E> actualReverseRecur(Node<E> currRoot){
+        if(currRoot == null || currRoot.getNext() == null){
+            return currRoot;
+        }
+
+        Node<E> newHead = actualReverseRecur(currRoot.getNext());
+        currRoot.getNext().setNext(currRoot);
+        currRoot.setNext(null);
+        return newHead;
+    }
 
     public SinglyLinkedList<E> sortedMerge(SinglyLinkedList<E> list2){
 //        if(!(list2.get(0) instanceof Comparable)|| size() == 0 || list2.size() == 0){
