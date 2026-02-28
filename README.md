@@ -82,3 +82,6 @@ nested recursion (function is called within a function call)
 
 Question 5: What is the output of Foo(2468)? \
 100110100100
+
+Question 6: psuedocode for a recursive function which prints the elements in reverse? \
+travel along every node and then print out each value
