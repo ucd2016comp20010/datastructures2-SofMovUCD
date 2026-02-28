@@ -109,7 +109,6 @@ public class SinglyLinkedList<E extends Comparable<E>> implements List<E> {
     public void add(int position, E e) {
         // TODO
         if(position <= 0){
-    //        Node<E> headNext = head;
             head = new Node<>(e, head);//set the new heads next node as the current head
             size++;
             return;
@@ -134,22 +133,12 @@ public class SinglyLinkedList<E extends Comparable<E>> implements List<E> {
     @Override
     public void addFirst(E e) {
         // TODO
-//        if(isEmpty()){
-//            Node<E> newNode = new Node<E>(e, null);
-//            this.head = newNode;
-//            size++;
-//            return;
-//        }
         add(0, e);
     }
 
     @Override
     public void addLast(E e) {
         // TODO
-//	if(isEmpty()){
-//                Node<E> newNode = new Node<E>(e, null);
-//                this.head = newNode;
-//        }
 	add(size, e);
     }
 
