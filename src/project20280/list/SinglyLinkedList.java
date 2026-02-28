@@ -204,7 +204,7 @@ public class SinglyLinkedList<E extends Comparable<E>> implements List<E> {
         head = prev;
     }
     public void reverseRecur(){
-        actualReverseRecur(head);
+        head = actualReverseRecur(head);
     }
     private Node<E> actualReverseRecur(Node<E> currRoot){
         if(currRoot == null || currRoot.getNext() == null){
