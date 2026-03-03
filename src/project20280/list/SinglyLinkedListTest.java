@@ -169,4 +169,16 @@ class SinglyLinkedListTest {
         assertEquals("[3, 2, 1]", ll.toString());
     }
 
+    @Test
+    void testRecurCopy(){
+        SinglyLinkedList<Integer> ll = new SinglyLinkedList<Integer>();
+        ll.addLast(1);
+        ll.addLast(2);
+        ll.addLast(3);
+
+        SinglyLinkedList<Integer> ll2 = ll.recursiveCopy();
+
+        assertEquals("[1, 2, 3]", ll2.toString());
+    }
+
 }
