@@ -61,15 +61,16 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         LinkedBinaryTree<String> bt = new LinkedBinaryTree<>();
         String[] arr = { "A", "B", "C", "D", "E", null, "F", null, null, "G", "H", null, null, null, null };
         bt.createLevelOrder(arr);
-        System.out.println(bt.toBinaryTreeString());
+//        System.out.println(bt.toBinaryTreeString());
         Integer [] inorder= {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
         Integer [] preorder= {18, 2, 1, 14, 13, 12, 4, 3, 9, 6, 5, 8, 7, 10, 11, 15, 16, 17, 28, 23, 19, 22, 20, 21, 24, 27, 26, 25, 29, 30};
 
         LinkedBinaryTree<Integer> bt2 = new LinkedBinaryTree<>();
         bt2.construct(inorder, preorder);
-        System.out.println(bt2.root());
+//        System.out.println(bt2.root());
         System.out.println(bt2.toBinaryTreeString());
-        avHiBinTree();
+//        avHiBinTree();
+        bt2.printLeftLeaves(bt2.root);
     }
 
 
@@ -514,4 +515,15 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         }
         writer.close();
     }
+    public void printLeftLeaves(Node<E> currRoot){
+        if(currRoot == null) return;
+        if(left(currRoot) == null && right(currRoot) == null){ //leaf
+            System.out. println(currRoot);
+            return;
+        }
+        printLeftLeaves((Node<E>)left(currRoot)); //print left first
+        printLeftLeaves((Node<E>)right(currRoot)); //print right afterwards
+        return; //exit function afer traversal
+    }
+
 }
