@@ -2,7 +2,6 @@ package project20280.list;
 
 import project20280.interfaces.List;
 
-import java.util.Comparator;
 import java.util.Iterator;
 
 
@@ -189,6 +188,21 @@ public class SinglyLinkedList<E extends Comparable<E>> implements List<E> {
             tmp = tmp.next;
         }
         return twin;
+    }
+    public SinglyLinkedList<E> recursiveCopy(){
+        SinglyLinkedList<E> newList = new SinglyLinkedList<>();
+        newList.addFirst(head.getElement());
+        newList.head.setNext(newList.actualRecursiveCopy(head.getNext()));
+        return newList;
+    }
+    private Node<E> actualRecursiveCopy(Node<E> currNode){
+        if(currNode == null){ //base case
+            return null;
+        }
+        Node<E> newNode = new Node<E>(currNode.getElement(), null); //create a new node
+        newNode.setNext(actualRecursiveCopy(currNode.getNext())); //add node to linked list
+        return newNode; //return node to be added to linked list
+
     }
 
     public void reverse() {
