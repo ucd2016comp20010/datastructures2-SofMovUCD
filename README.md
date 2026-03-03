@@ -84,4 +84,15 @@ Question 5: What is the output of Foo(2468)? \
 100110100100
 
 Question 6: psuedocode for a recursive function which prints the elements in reverse? \
-travel along every node and then print out each value
+travel along every node and then print out each value (after the visit (the recursive call))
+
+Question 7: pseudocode for a recursive function which copies the elements in reverse? \
+return if the value of the node is null \
+create new node \
+set the next node to be the recursive call \
+return the new node
+
+Question 8: Draw the recursive trace for mystery(2,4,4) \
+mystery(2,4,4) calls mystery(1,4,4) \
+mystery(1,4,4) returns 4 \
+mystery(2,4,4) returns 4+4 (8) \
