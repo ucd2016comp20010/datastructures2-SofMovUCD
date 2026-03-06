@@ -37,6 +37,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     public static LinkedBinaryTree<Integer> makeRandom(int n) {
         LinkedBinaryTree<Integer> bt = new LinkedBinaryTree<>();
         bt.root = randomTree(null, 1, n);
+        bt.size = n;
         return bt;
     }
 
@@ -51,6 +52,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
             Node<T> root = new Node<T>((T) ((Integer) (first + leftCount)), parent, null, null);
             root.setLeft(randomTree(root, first, first + leftCount - 1));
             root.setRight(randomTree(root, first + leftCount + 1, last));
+
             return root;
         }
     }
@@ -71,6 +73,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         System.out.println(bt2.toBinaryTreeString());
 //        avHiBinTree();
         bt2.printLeftLeaves(bt2.root);
+        inorderMethodTimer();
     }
 
 
@@ -524,6 +527,21 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         printLeftLeaves((Node<E>)left(currRoot)); //print left first
         printLeftLeaves((Node<E>)right(currRoot)); //print right afterwards
         return; //exit function afer traversal
+    }
+
+    public static void inorderMethodTimer() throws FileNotFoundException, UnsupportedEncodingException {
+        project20280.tree.Timer timer = new Timer();
+        PrintWriter writer = new PrintWriter("inorderMethodTimer.csv", "UTF-8"); //helper to write to file
+        //LinkedBinaryTree<Integer> lbt = LinkedBinaryTree.makeRandom(0);
+        for(int i = 10; i <= 10000; i++){ //for each tree size
+            LinkedBinaryTree<Integer> lbt = LinkedBinaryTree.makeRandom(i);
+            Runnable worker = () -> {
+                lbt.inorder();
+            };
+            double result = timer.measure(worker);
+            writer.println(i+", "+ result);
+        }
+        writer.close();
     }
 
 }
