@@ -96,3 +96,51 @@ Question 8: Draw the recursive trace for mystery(2,4,4) \
 mystery(2,4,4) calls mystery(1,4,4) \
 mystery(1,4,4) returns 4 \
 mystery(2,4,4) returns 4+4 (8) \
+
+### Week 6 (Priority queues and Heaps)
+Question 1: Illustrate the execution of the heap.insert() method \
+2 \
+\
+2 \
+5 \
+\
+2 \
+5 16\
+\
+2 \
+4 5\
+16 \
+\
+2 \
+4 5\
+10 16\
+\
+2 \
+4 5\
+10 16 23\
+\
+2 \
+4 5\
+10 16 23 39\
+\
+2 \
+4 5\
+10 16 23 39\
+18 \
+\
+2 \
+4 5\
+10 16 23 39\
+18 26 \
+\
+       2 \
+     4      5\
+  10   15 23 39\
+18 26 16\
+\
+Question 2: preorder traversal \
+2, 4, 10, 18, 26, 15, 16, 5, 23, 39 \
+Question 3: postorder traversal \
+18, 26, 10, 16, 15, 4, 23, 39, 5, 2
+Question 4: construction of valid heap \
+both yes due to all numbers being given (heapify)
