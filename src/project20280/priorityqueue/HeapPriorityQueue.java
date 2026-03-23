@@ -79,6 +79,9 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
      */
     protected void swap(int i, int j) {
         // TODO
+        int temp = i;
+        i = j;
+        j = temp;
     }
 
     /**
