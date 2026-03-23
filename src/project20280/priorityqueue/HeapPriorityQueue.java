@@ -56,22 +56,22 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
 
     protected int left(int j) {
         // TODO
-        return 0;
+        return j-1;
     }
 
     protected int right(int j) {
         // TODO
-        return 0;
+        return j+1;
     }
 
     protected boolean hasLeft(int j) {
         // TODO
-        return false;
+        return j-1 < size;
     }
 
     protected boolean hasRight(int j) {
         // TODO
-        return false;
+        return j+1 < size;
     }
 
     /**
