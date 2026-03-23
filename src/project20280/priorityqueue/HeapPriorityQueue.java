@@ -90,6 +90,9 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
      */
     protected void upheap(int j) {
         // TODO
+        while(parent(j) > j){
+            swap(parent(j), j);
+        }
     }
 
     /**
