@@ -16,7 +16,7 @@ import java.util.Comparator;
 public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
 
     protected ArrayList<Entry<K, V>> heap = new ArrayList<>();
-    private int size; //added size variable
+    private int size = 0; //added size variable
 
     /**
      * Creates an empty priority queue based on the natural ordering of its keys.
@@ -126,6 +126,12 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
      */
     protected void heapify() {
         // TODO
+        //check heap is correct
+        for(int i = 0; i < size; i++){
+            if((hasLeft(i) && left(i) < i) || (hasRight(i) && right(i) < i)){
+                downheap(i);
+            }
+        }
     }
 
     // public methods
