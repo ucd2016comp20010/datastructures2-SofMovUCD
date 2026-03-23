@@ -51,7 +51,7 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
     // protected utilities
     protected int parent(int j) {
         // TODO
-        return 0;
+        return (int)j/2;
     }
 
     protected int left(int j) {
