@@ -17,7 +17,6 @@ import java.util.Map;
 public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
 
     protected ArrayList<Entry<K, V>> heap = new ArrayList<>();
-    private int size = 0; //added size variable
 
     /**
      * Creates an empty priority queue based on the natural ordering of its keys.
@@ -67,12 +66,12 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
 
     protected boolean hasLeft(int j) {
         // TODO
-        return j*2 < size;
+        return j*2 < size();
     }
 
     protected boolean hasRight(int j) {
         // TODO
-        return j*2+1 < size;
+        return j*2+1 < size();
     }
 
     /**
@@ -91,7 +90,7 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
      */
     protected void upheap(int j) {
         // TODO
-        while(parent(j) > j){
+        while(compare(heap.get(parent(j)), heap.get(j)) > 0){
             swap(parent(j), j);
         }
     }
@@ -102,20 +101,19 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
     protected void downheap(int j) {
         // TODO
         //move j down if either child smaller, ie j is bigger
-        int jIsSmall = 0;
         if(hasLeft(j) || hasRight(j)) {
             while (hasLeft(j) || hasRight(j)) {
-                swap(parent(j), j);
-                if(hasLeft(j) && hasRight(j) && (j > right(j) || j > left(j))){
+                //swap(parent(j), j);
+                if(hasLeft(j) && hasRight(j) && (compare(heap.get(j), heap.get(right(j))) > 0 || compare(heap.get(j), heap.get(left(j))) > 0)){ //has both children
                     swap(j, Math.min(right(j), left(j)));
                 }
-                else if(hasLeft(j) && j > left(j)){
+                else if(hasLeft(j) && compare(heap.get(j), heap.get(left(j))) > 0){ //only left child
                     swap(left(j), j);
                 }
-                else if(hasRight(j) && j > right(j)){
+                else if(hasRight(j) && compare(heap.get(j), heap.get(right(j))) > 0){ //only right child
                     swap(right(j), j);
                 }
-                else if(!hasRight(j) && !hasLeft(j)){
+                else{ //no children
                     break;
                 }
             }
@@ -128,10 +126,8 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
     protected void heapify() {
         // TODO
         //check heap is correct
-        for(int i = 0; i < size; i++){
-            if((hasLeft(i) && left(i) < i) || (hasRight(i) && right(i) < i)){
-                downheap(i);
-            }
+        for(int i = 0; i < size(); i++){
+            downheap(i);
         }
     }
 
@@ -144,7 +140,7 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
      */
     @Override
     public int size() {
-        return size;
+        return heap.size();
     }
 
     /**
