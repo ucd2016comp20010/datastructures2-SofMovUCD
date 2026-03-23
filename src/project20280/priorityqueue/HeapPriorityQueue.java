@@ -108,7 +108,7 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
                 //swap(parent(j), j);
                 if(hasLeft(j) && hasRight(j) && (compare(heap.get(j), heap.get(right(j))) > 0 || compare(heap.get(j), heap.get(left(j))) > 0)){ //has both children
                     swap(j, Math.min(right(j), left(j)));
-                    j = Math.min(right(j), left(j));
+                    j = compare(heap.get(right(j)), heap.get(left(j))) > 0? left(j):right(j);
                 }
                 else if(hasLeft(j) && compare(heap.get(j), heap.get(left(j))) > 0){ //only left child
                     swap(left(j), j);
@@ -169,7 +169,7 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
     @Override
     public Entry<K, V> insert(K key, V value) throws IllegalArgumentException {
         // TODO
-        PQEntry newEnt = new PQEntry<>(key, value);
+        Entry<K, V> newEnt = new PQEntry<>(key, value);
         heap.addLast(newEnt);
         upheap(heap.size()-1);
         return newEnt;
@@ -183,7 +183,12 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
     @Override
     public Entry<K, V> removeMin() {
         // TODO
-        return null;
+        if(isEmpty()) return null;
+        swap(0, heap.size()-1); //swap with last element
+        Entry<K, V> elemToRemove = heap.getLast(); //save the element
+        heap.removeLast(); //remove the last element
+        downheap(0); //downheap the first element(last in the list originaly)
+        return elemToRemove;
     }
 
     public String toString() {
