@@ -7,6 +7,7 @@ import project20280.interfaces.Entry;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Map;
 
 
 /**
@@ -167,7 +168,10 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
     @Override
     public Entry<K, V> insert(K key, V value) throws IllegalArgumentException {
         // TODO
-        return null;
+        PQEntry newEnt = new PQEntry<>(key, value);
+        heap.addLast(newEnt);
+        upheap(heap.size()-1);
+        return newEnt;
     }
 
     /**
