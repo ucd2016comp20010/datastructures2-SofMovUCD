@@ -79,9 +79,9 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
      */
     protected void swap(int i, int j) {
         // TODO
-        int temp = i;
-        i = j;
-        j = temp;
+        Entry<K,V> temp = heap.get(i);
+        heap.set(i, heap.get(j));
+        heap.set(j, temp);
     }
 
     /**
@@ -92,12 +92,14 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
         // TODO
         while(compare(heap.get(parent(j)), heap.get(j)) > 0){
             swap(parent(j), j);
+            j = parent(j);
         }
     }
 
     /**
      * Moves the entry at index j lower, if necessary, to restore the heap property.
      */
+    //[1, 2, 4, 12, 23, 5, 26, 15, 35, 24, 33, 21]
     protected void downheap(int j) {
         // TODO
         //move j down if either child smaller, ie j is bigger
@@ -106,12 +108,15 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
                 //swap(parent(j), j);
                 if(hasLeft(j) && hasRight(j) && (compare(heap.get(j), heap.get(right(j))) > 0 || compare(heap.get(j), heap.get(left(j))) > 0)){ //has both children
                     swap(j, Math.min(right(j), left(j)));
+                    j = Math.min(right(j), left(j));
                 }
                 else if(hasLeft(j) && compare(heap.get(j), heap.get(left(j))) > 0){ //only left child
                     swap(left(j), j);
+                    j = left(j);
                 }
                 else if(hasRight(j) && compare(heap.get(j), heap.get(right(j))) > 0){ //only right child
                     swap(right(j), j);
+                    j = right(j);
                 }
                 else{ //no children
                     break;
