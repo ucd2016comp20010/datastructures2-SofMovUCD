@@ -56,12 +56,12 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
 
     protected int left(int j) {
         // TODO
-        return j-1;
+        return j*2;
     }
 
     protected int right(int j) {
         // TODO
-        return j+1;
+        return j*2+1;
     }
 
     protected boolean hasLeft(int j) {
@@ -100,6 +100,9 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
      */
     protected void downheap(int j) {
         // TODO
+        while(parent(j) > j){
+            swap(parent(j), j);
+        }
     }
 
     /**
