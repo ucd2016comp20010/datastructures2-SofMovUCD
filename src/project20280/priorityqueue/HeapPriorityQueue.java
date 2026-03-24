@@ -6,6 +6,7 @@ package project20280.priorityqueue;
 import project20280.interfaces.Entry;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
 
@@ -136,7 +137,7 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
         // TODO
         //check heap is correct
         for(int i = 0; i < size(); i++){
-            downheap(i);
+            upheap(i);
         }
     }
 
@@ -225,7 +226,7 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
         Integer[] rands = new Integer[]{35, 26, 15, 24, 33, 4, 12, 1, 23, 21, 2, 5};
         HeapPriorityQueue<Integer, Integer> pq = new HeapPriorityQueue<>(rands, rands);
 
-        System.out.println("elements: " + rands);
+        System.out.println("elements: " + Arrays.toString(rands));
         System.out.println("after adding elements: " + pq);
 
         System.out.println("min element: " + pq.min());
