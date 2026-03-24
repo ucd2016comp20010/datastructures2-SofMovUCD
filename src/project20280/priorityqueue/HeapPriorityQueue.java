@@ -48,7 +48,7 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
         // TODO
         int length = keys.length;
         for(int i = 0; i < length; i++){
-            heap.addLast(new PQEntry<K, V>(keys[i], values[i]));
+            heap.add(new PQEntry<K, V>(keys[i], values[i]));
         }
         heapify();
     }
@@ -96,8 +96,8 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
     protected void upheap(int j) {
         // TODO
         while(compare(heap.get(parent(j)), heap.get(j)) > 0){
-            swap(parent(j), j);
-            j = parent(j);
+            swap(parent(j), j); //actually change entries
+            j = parent(j); //update index
         }
     }
 
@@ -108,26 +108,44 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
     protected void downheap(int j) {
         // TODO
         //move j down if either child smaller, ie j is bigger
-        if(hasLeft(j) || hasRight(j)) {
-            while (hasLeft(j) || hasRight(j)) {
-                //swap(parent(j), j);
-                if(hasLeft(j) && hasRight(j) && (compare(heap.get(j), heap.get(right(j))) > 0 || compare(heap.get(j), heap.get(left(j))) > 0)){ //has both children
-                    swap(j, Math.min(right(j), left(j)));
-                    j = compare(heap.get(right(j)), heap.get(left(j))) > 0? left(j):right(j);
-                }
-                else if(hasLeft(j) && compare(heap.get(j), heap.get(left(j))) > 0){ //only left child
-                    swap(left(j), j);
-                    j = left(j);
-                }
-                else if(hasRight(j) && compare(heap.get(j), heap.get(right(j))) > 0){ //only right child
-                    swap(right(j), j);
-                    j = right(j);
-                }
-                else{ //no children
-                    break;
-                }
-            }
+//            while (hasLeft(j) || hasRight(j)) {
+//                if(hasLeft(j) && hasRight(j)){
+//                    if(compare(heap.get(j), heap.get(right(j))) > 0 || compare(heap.get(j), heap.get(left(j))) > 0){ //has both children
+//                        swap(j, Math.min(right(j), left(j)));
+//                        j = compare(heap.get(right(j)), heap.get(left(j))) > 0 ? left(j) : right(j);
+//                    }
+//                    else break;
+//                }
+//                else if(hasLeft(j)){
+//                    if(compare(heap.get(j), heap.get(left(j))) > 0){//only left child
+//                        swap(left(j), j);
+//                        j = left(j);
+//                    }
+//                    else break;
+//                }
+//                else if(hasRight(j)){
+//                   if(compare(heap.get(j), heap.get(right(j))) > 0){
+//                        swap(right(j), j);
+//                        j = right(j);
+//                   }  //only right child
+//                    else break;
+//                }
+//                else{ //no children (no further down to go)
+//                    break;
+//                }
+//            }
+        int max = j;
+        if(hasLeft(j) && compare(heap.get(left(j)), heap.get(j)) < 0){ //if smaller child left
+            max = left(j);
         }
+        else if(hasRight(j) && compare(heap.get(right(j)), heap.get(j)) < 0){ //if smaller child right
+            max = right(j);
+        }
+        if(j != max){ //if smaller child found
+            swap(j,max);
+            downheap(max);
+        }
+
     }
 
     /**
@@ -136,8 +154,8 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
     protected void heapify() {
         // TODO
         //check heap is correct
-        for(int i = 0; i < size(); i++){
-            upheap(i);
+        for(int i = size()-1; i >= 0; i--){
+            downheap(i);
         }
     }
 
@@ -237,5 +255,10 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
         //        2,            4,
         //   23,     21,      5, 12,
         // 24, 26, 35, 33, 15]
+        //my tree
+        //[          2,
+        //       26,      5,
+        //   23,     4, 12, 15,
+        // 35, 24, 33, 21]
     }
 }
