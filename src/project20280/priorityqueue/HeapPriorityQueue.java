@@ -239,6 +239,15 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
             }
         }
     }
+    public static <E> void PQSort(E[] full){
+        HeapPriorityQueue<E, ?> fillMeUp = new HeapPriorityQueue<>();
+        for(E item : full){
+            fillMeUp.insert(item, null);
+        }
+        for(int i = 0; i < full.length; i++){
+            full[i] = fillMeUp.removeMin().getKey();
+        }
+    }
 
     public static void main(String[] args) {
         Integer[] rands = new Integer[]{35, 26, 15, 24, 33, 4, 12, 1, 23, 21, 2, 5};
