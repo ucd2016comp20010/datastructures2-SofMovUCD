@@ -254,6 +254,21 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
         }
     }
 
+    public static <E> void Heapsort(E[] arr) {
+        HeapPriorityQueue<E, ?> fillMeUp = new HeapPriorityQueue<>(arr, arr);
+
+        for (int i = arr.length-1; i >= 0; i--) {
+            fillMeUp.swap(0, i);
+            fillMeUp.downheap(0);
+        }
+
+        fillMeUp.swap(0,1);
+
+        for(int i=0; i<arr.length; ++i){
+            arr[i] = fillMeUp.removeMin().getKey();
+        }
+    }
+
     public static void PQtimer() throws FileNotFoundException, UnsupportedEncodingException {
         project20280.tree.Timer timer = new Timer();
         double total = 0;
