@@ -2,6 +2,8 @@ package project20280.priorityqueue;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class HeapPriorityQueueTest {
@@ -59,6 +61,14 @@ class HeapPriorityQueueTest {
         for (Integer i : arr) pq.insert(i, Integer.toString(i));
 
         assertEquals("[1, 2, 5, 23, 4, 12, 15, 35, 24, 33, 21, 26]", pq.toString());
+    }
+
+    @Test
+    void testHeapSort() {
+        Integer[] arr = new Integer[]{35, 26, 15, 24, 33, 4, 12, 1, 23, 21, 2, 5};
+        HeapPriorityQueue.Heapsort(arr);
+
+        assertEquals("[1, 2, 4, 5, 12, 15, 21, 23, 24, 26, 33, 35]", Arrays.toString(arr));
     }
 
 }
