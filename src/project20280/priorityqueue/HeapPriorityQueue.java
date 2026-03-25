@@ -4,11 +4,9 @@ package project20280.priorityqueue;
  */
 
 import project20280.interfaces.Entry;
-import project20280.tree.LinkedBinaryTree;
 import project20280.tree.Timer;
 
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
@@ -138,16 +136,16 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
 //                    break;
 //                }
 //            }
-        int max = j;
+        int min = j;
         if(hasLeft(j) && compare(heap.get(left(j)), heap.get(j)) < 0){ //if smaller child left
-            max = left(j);
+            min = left(j);
         }
-        else if(hasRight(j) && compare(heap.get(right(j)), heap.get(j)) < 0){ //if smaller child right
-            max = right(j);
+        if(hasRight(j) && compare(heap.get(right(j)), heap.get(min)) < 0){ //if smaller child right
+            min = right(j);
         }
-        if(j != max){ //if smaller child found
-            swap(j,max);
-            downheap(max);
+        if(j != min){ //if smaller child found
+            swap(j, min);
+            downheap(min);
         }
 
     }
@@ -158,7 +156,7 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
     protected void heapify() {
         // TODO
         //check heap is correct
-        for(int i = size()-1; i >= 0; i--){
+        for(int i = (size()/2)-1; i >= 0; i--){
             downheap(i);
         }
     }
@@ -257,14 +255,12 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
     public static <E> void Heapsort(E[] arr) {
         HeapPriorityQueue<E, ?> fillMeUp = new HeapPriorityQueue<>(arr, arr);
 
-        for (int i = arr.length-1; i >= 0; i--) {
+        for (int i = arr.length-1; i > 0; i--) {
             fillMeUp.swap(0, i);
             fillMeUp.downheap(0);
         }
 
-        fillMeUp.swap(0,1);
-
-        for(int i=0; i<arr.length; ++i){
+        for(int i=0; i<arr.length; i++){
             arr[i] = fillMeUp.removeMin().getKey();
         }
     }
@@ -294,25 +290,20 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
     }
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
-        PQtimer();
-//        Integer[] rands = new Integer[]{35, 26, 15, 24, 33, 4, 12, 1, 23, 21, 2, 5};
-//        HeapPriorityQueue<Integer, Integer> pq = new HeapPriorityQueue<>(rands, rands);
-//
-//        System.out.println("elements: " + Arrays.toString(rands));
-//        System.out.println("after adding elements: " + pq);
-//
-//        System.out.println("min element: " + pq.min());
-//
-//        pq.removeMin();
-//        System.out.println("after removeMin: " + pq);
+        //PQtimer();
+        Integer[] rands = new Integer[]{35, 26, 15, 24, 33, 4, 12, 1, 23, 21, 2, 5};
+        HeapPriorityQueue<Integer, Integer> pq = new HeapPriorityQueue<>(rands, rands);
+
+        System.out.println("elements: " + Arrays.toString(rands));
+        System.out.println("after adding elements: " + pq);
+
+        System.out.println("min element: " + pq.min());
+
+        pq.removeMin();
+        System.out.println("after removeMin: " + pq);
         // [             1,
         //        2,            4,
         //   23,     21,      5, 12,
         // 24, 26, 35, 33, 15]
-        //my tree
-        //[          2,
-        //       26,      5,
-        //   23,     4, 12, 15,
-        // 35, 24, 33, 21]
     }
 }
