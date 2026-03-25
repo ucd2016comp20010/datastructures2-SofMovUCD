@@ -4,11 +4,15 @@ package project20280.priorityqueue;
  */
 
 import project20280.interfaces.Entry;
+import project20280.tree.LinkedBinaryTree;
+import project20280.tree.Timer;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Map;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
+import java.util.stream.IntStream;
 
 
 /**
@@ -239,6 +243,7 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
             }
         }
     }
+
     public static <E> void PQSort(E[] full){
         HeapPriorityQueue<E, ?> fillMeUp = new HeapPriorityQueue<>();
         for(E item : full){
@@ -249,17 +254,42 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
         }
     }
 
-    public static void main(String[] args) {
-        Integer[] rands = new Integer[]{35, 26, 15, 24, 33, 4, 12, 1, 23, 21, 2, 5};
-        HeapPriorityQueue<Integer, Integer> pq = new HeapPriorityQueue<>(rands, rands);
+    public static void PQtimer() throws FileNotFoundException, UnsupportedEncodingException {
+        project20280.tree.Timer timer = new Timer();
+        double total = 0;
 
-        System.out.println("elements: " + Arrays.toString(rands));
-        System.out.println("after adding elements: " + pq);
+        PrintWriter writer = new PrintWriter("PQSorttimer.csv", "UTF-8");
+        //do from 1 000 to 1 000 000
+        for(int i = 1000; i < 1000000; i+=1000){ //each size
+            for(int j = 0; j < 100; j++){ //100 different ones
+                int finalI = i;
+                Integer[] ok = IntStream.generate(() -> new Random().nextInt(finalI)).limit(i).boxed().toArray( Integer[]::new );
+                Runnable worker = () -> {
+                    PQSort(ok);
+                };
+                double result = timer.measure(worker);
+                total +=  result;
+            }
+            System.out.println(i+", "+ total/100);
+            writer.printf("%d, %e\n",i , total/100);
 
-        System.out.println("min element: " + pq.min());
+            total = 0;
+        }
+        writer.close();
+    }
 
-        pq.removeMin();
-        System.out.println("after removeMin: " + pq);
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
+        PQtimer();
+//        Integer[] rands = new Integer[]{35, 26, 15, 24, 33, 4, 12, 1, 23, 21, 2, 5};
+//        HeapPriorityQueue<Integer, Integer> pq = new HeapPriorityQueue<>(rands, rands);
+//
+//        System.out.println("elements: " + Arrays.toString(rands));
+//        System.out.println("after adding elements: " + pq);
+//
+//        System.out.println("min element: " + pq.min());
+//
+//        pq.removeMin();
+//        System.out.println("after removeMin: " + pq);
         // [             1,
         //        2,            4,
         //   23,     21,      5, 12,
