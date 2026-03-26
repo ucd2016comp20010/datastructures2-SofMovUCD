@@ -14,8 +14,10 @@ public class PriorityJobSchedulerTest {
         Job job4 = new Job("Job4", JobPriority.MEDIUM);
         Job job5 = new Job("Job5", JobPriority.LOW);
         Job job6 = new Job("Job6", JobPriority.HIGH);
+
         PriorityJobScheduler pjs = new PriorityJobScheduler(
                 POOL_SIZE, QUEUE_SIZE);
+
         pjs.scheduleJob(job1);
         pjs.scheduleJob(job2);
         pjs.scheduleJob(job3);
