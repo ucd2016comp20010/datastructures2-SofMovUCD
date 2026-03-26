@@ -110,32 +110,6 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
     protected void downheap(int j) {
         // TODO
         //move j down if either child smaller, ie j is bigger
-//            while (hasLeft(j) || hasRight(j)) {
-//                if(hasLeft(j) && hasRight(j)){
-//                    if(compare(heap.get(j), heap.get(right(j))) > 0 || compare(heap.get(j), heap.get(left(j))) > 0){ //has both children
-//                        swap(j, Math.min(right(j), left(j)));
-//                        j = compare(heap.get(right(j)), heap.get(left(j))) > 0 ? left(j) : right(j);
-//                    }
-//                    else break;
-//                }
-//                else if(hasLeft(j)){
-//                    if(compare(heap.get(j), heap.get(left(j))) > 0){//only left child
-//                        swap(left(j), j);
-//                        j = left(j);
-//                    }
-//                    else break;
-//                }
-//                else if(hasRight(j)){
-//                   if(compare(heap.get(j), heap.get(right(j))) > 0){
-//                        swap(right(j), j);
-//                        j = right(j);
-//                   }  //only right child
-//                    else break;
-//                }
-//                else{ //no children (no further down to go)
-//                    break;
-//                }
-//            }
         int min = j;
         if(hasLeft(j) && compare(heap.get(left(j)), heap.get(j)) < 0){ //if smaller child left
             min = left(j);
