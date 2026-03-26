@@ -31,7 +31,19 @@ public class Job implements Runnable, Comparable<Job>{
         }
 
         //then compare duration
-        return Long.compare(this.expectedDuration, other.expectedDuration);
+        Integer thisDuration = this.expectedDuration;
+        Integer otherDuration = other.expectedDuration;
+
+        if (thisDuration == null && otherDuration == null) {
+            return 0;
+        }
+        if (thisDuration == null) {
+            return 1; //null goes after non-null
+        }
+        if (otherDuration == null) {
+            return -1; //non-null goes before null
+        }
+        return Integer.compare(this.expectedDuration, other.expectedDuration);
     }
 
     @Override
