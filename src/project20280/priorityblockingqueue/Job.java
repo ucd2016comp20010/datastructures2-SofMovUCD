@@ -1,8 +1,5 @@
 package project20280.priorityblockingqueue;
 
-import javax.print.attribute.standard.JobPriority;
-
-import static java.util.Objects.compare;
 
 public class Job implements Runnable, Comparable<Job>{
     private String jobName;
