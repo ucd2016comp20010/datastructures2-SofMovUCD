@@ -67,7 +67,12 @@ public class ProbeHashMap<K, V> extends AbstractHashMap<K, V> {
     @Override
     protected V bucketRemove(int h, K k) {
         // TODO
-        return null;
+        int j = findSlot(h,k);
+        if(j < 0) return null;
+        V answer = table[j].getValue();
+        table[j] = DEFUNCT;
+        n--;
+        return answer;
     }
 
     @Override
