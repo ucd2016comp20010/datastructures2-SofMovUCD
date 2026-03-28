@@ -53,7 +53,9 @@ public class ChainHashMap<K, V> extends AbstractHashMap<K, V> {
     @Override
     protected V bucketGet(int h, K k) {
         // TODO
-        return null;
+        UnsortedTableMap<K,V> bucket = table[h];
+        if(bucket == null) return null;
+        return bucket.get(k);
     }
 
     /**
