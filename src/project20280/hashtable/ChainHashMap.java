@@ -91,7 +91,12 @@ public class ChainHashMap<K, V> extends AbstractHashMap<K, V> {
     @Override
     protected V bucketRemove(int h, K k) {
         // TODO
-        return null;
+        UnsortedTableMap<K,V> bucket = table[h];
+        if(bucket == null) return null; //bucket doesnt exist
+        int oldSize = bucket.size();
+        V answer = bucket.remove(k);
+        n -= oldSize - bucket.size();
+        return answer;
     }
 
     /**
