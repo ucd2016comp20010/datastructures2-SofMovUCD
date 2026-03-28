@@ -55,6 +55,12 @@ public class ProbeHashMap<K, V> extends AbstractHashMap<K, V> {
     @Override
     protected V bucketPut(int h, K k, V v) {
         // TODO
+        int j = findSlot(h,k );
+        if(j >= 0){
+            return table[j].setValue(v);
+        }
+        table[-(j+1)] = new MapEntry<>(k,v);
+        n++;
         return null;
     }
 
