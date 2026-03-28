@@ -31,7 +31,17 @@ public class ProbeHashMap<K, V> extends AbstractHashMap<K, V> {
 
     int findSlot(int h, K k) {
         // TODO
-        return 0;
+        int avail = -1;
+        int j = h;
+        do {
+            if (table[j] == null || table[j] == DEFUNCT) {
+                if (avail == -1) avail = j;
+                if (table[j] == null) break;
+            } else if (table[j].getKey().equals(k))
+                return j;
+            j = (j + 1) % capacity;
+        }   while(j != h);
+        return -(avail+1);
     }
 
     @Override
