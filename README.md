@@ -141,6 +141,13 @@ Question 1: Illustrate the execution of the heap.insert() method \
 Question 2: preorder traversal \
 2, 4, 10, 18, 26, 15, 16, 5, 23, 39 \
 Question 3: postorder traversal \
-18, 26, 10, 16, 15, 4, 23, 39, 5, 2
+18, 26, 10, 16, 15, 4, 23, 39, 5, 2 \
 Question 4: construction of valid heap \
 both yes due to all numbers being given (heapify)
+
+### Week 7 (HashTables)
+
+Question 3: 11 entry hash table \
+0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+-----------------------------------
+  |   |   | 44 |    |   |  |    | 12 |   |    |
