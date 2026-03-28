@@ -70,7 +70,13 @@ public class ChainHashMap<K, V> extends AbstractHashMap<K, V> {
     @Override
     protected V bucketPut(int h, K k, V v) {
         // TODO
-        return null;
+        UnsortedTableMap<K,V> bucket = table[h];
+        if(bucket == null) //bucket doesnt exist
+            bucket = table[h] = new UnsortedTableMap<>(); //create it
+        int oldSize = bucket.size();
+        V answer = bucket.put(k ,v);
+        n += bucket.size()-oldSize;
+        return answer;
     }
 
 
