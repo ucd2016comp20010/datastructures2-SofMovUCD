@@ -2,6 +2,8 @@ package project20280.hashtable;
 
 import project20280.interfaces.Entry;
 
+import java.util.ArrayList;
+
 public class ProbeHashMap<K, V> extends AbstractHashMap<K, V> {
     private MapEntry<K, V>[] table;
     private final MapEntry<K, V> DEFUNCT = new MapEntry<>(null, null);
@@ -77,6 +79,10 @@ public class ProbeHashMap<K, V> extends AbstractHashMap<K, V> {
 
     @Override
     public Iterable<Entry<K, V>> entrySet() {
-        return null;
+        // TODO
+        ArrayList<Entry <K,V>> buffer = new ArrayList<>();
+        for(int h = 0; h < capacity; h++)
+            if(!(table[h] == null || table[h] == DEFUNCT)) buffer.add(table[h]);
+        return buffer;
     }
 }
