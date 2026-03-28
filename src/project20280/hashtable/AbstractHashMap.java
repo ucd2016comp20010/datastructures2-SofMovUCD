@@ -113,7 +113,7 @@ public abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
      */
     private int hashValue(K key) {
         // TODO
-        return 0;
+        return(int) ((Math.abs(key.hashCode()*scale + shift) % prime) % capacity);
     }
 
     /**
