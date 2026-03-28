@@ -61,7 +61,8 @@ public class UnsortedTableMap<K, V> extends AbstractMap<K, V> {
     @Override
     public V get(K key) {
         // TODO
-        return null;
+        int i = findIndex(key);
+        return i == -1? null:table.get(i).getValue();
     }
 
     /**
