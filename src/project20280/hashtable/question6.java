@@ -9,6 +9,23 @@ import java.util.Scanner;
 
 public class question6 {
 
+    public void a(File f, ChainHashMap<String, Integer> counter) throws FileNotFoundException {
+        Scanner scanner = new Scanner(f);
+
+        while(scanner.hasNext()){
+            String word = scanner.next().toLowerCase();
+            //System.out.println("word: "+word);
+
+            //if word not in hashmap add it with count 1
+            if(counter.bucketGet(word) == null){
+                counter.put( word, 1); //add number
+            }
+            else{ //if word in hashmap, increment count by 1
+                counter.put(word, counter.get(word)+1);
+            }
+        }
+    }
+
     public int hashCode(String s){
         int hash = 0;
         int skip = Math.max(1, s.length()/8);
@@ -50,7 +67,7 @@ public class question6 {
             //System.out.println("word: "+word);
 
             //if word not in hashmap add it with count 1
-            if(counter.get(word) == null){
+            if(counter.bucketGet(word) == null){
                 counter.put( word, 1); //add number
             }
             else{ //if word in hashmap, increment count by 1
