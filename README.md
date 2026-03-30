@@ -155,3 +155,31 @@ Question 3: 11 entry hash table
 |     | 39  |     |     |     | 88  |     |     | 23  | 5   |
 |     |     |     |     |     | 11  |
 
+Question 4: MAD hash function 19-entry hash table
+
+| _0_ | _1_ | _2_ | _3_ | _4_ | _5_ | _6_ | _7_ | _8_ | _9_ | _10_ | _11_ | _12_ | _13_ | _14_ | _15_ | _16_ | _17_ | _18_ |
+|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|------|------|------|------|------|------|------|------|------|
+| 23  |     | 13  |     | 11  | 88  |     |     | 44  | 5   |      | 94   |      |      |      | 16   |      |      | 12   |
+|     |     | 39  |     |     | 20  |     |     |     |     |      |      |      |      |      |      |      |      |      |
+
+(code used)
+```C
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main(){
+    srand(time(NULL));
+    int p = 127;
+    int N = 19;
+    int a, b, num;
+    
+    while(scanf("%d", &num) != EOF){
+        a = rand() % p;
+        b = rand() % p;
+        printf("%d\n", abs((a*num+b)%p)%N);
+    }
+    return 0;
+}
+```
+
