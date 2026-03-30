@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 
 public class countingcounting {
-    public static void main(String[] args) throws FileNotFoundException {
+    static void main() throws FileNotFoundException {
         File f = new File("C:\\Users\\mysof\\IdeaProjects\\datastructures2-SofMovUCD\\sample_text.txt");
 
         ChainHashMap<String, Integer> counter = new ChainHashMap<>();
@@ -22,7 +22,7 @@ public class countingcounting {
 
             //if word not in hashmap add it with count 1
             if(counter.get(word) == null){
-                counter.put( word, 1); //add number
+                counter.put(word, 1); //add number
             }
             else{ //if word in hashmap, increment count by 1
                 counter.put(word, counter.get(word)+1);
