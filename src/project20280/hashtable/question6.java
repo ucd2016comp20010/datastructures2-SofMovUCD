@@ -6,27 +6,33 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class question6 {
 
-    public void a(File f, ChainHashMap<String, Integer> counter) throws FileNotFoundException {
+    public static void partA(File f, ChainHashMap<String, Integer> counter) throws FileNotFoundException {
         Scanner scanner = new Scanner(f);
+        int[] collisions = new int[11];
+        int hashGotten;
 
         while(scanner.hasNext()){
             String word = scanner.next().toLowerCase();
-            //System.out.println("word: "+word);
+            hashGotten = Math.abs(hash_poly(word, 41) % 11);
+
 
             //if word not in hashmap add it with count 1
-            if(counter.bucketGet(word) == null){
-                counter.put( word, 1); //add number
+            if(counter.bucketGet(hashGotten, word) == null){
+                collisions[hashGotten]++; //increase only when a new item is added
+                counter.bucketPut(hashGotten, word, 1); //add number
             }
             else{ //if word in hashmap, increment count by 1
-                counter.put(word, counter.get(word)+1);
+                counter.bucketPut(hashGotten, word, counter.bucketGet(hashGotten, word)+1);
             }
         }
+        System.out.println("Number of collisions is "+ (IntStream.of(collisions).sum()-11));
     }
 
-    public int hashCode(String s){
+    public static int hashCode(String s){
         int hash = 0;
         int skip = Math.max(1, s.length()/8);
         for(int i = 0; i < s.length(); i+= skip){
@@ -35,7 +41,7 @@ public class question6 {
         return hash;
     }
 
-    public int hash_poly(String s, int a){
+    public static int hash_poly(String s, int a){
         int h = 0;
         int n = s.length();
         for(int i = 0; i < n; i++){
@@ -46,7 +52,7 @@ public class question6 {
         return h;
     }
 
-    public int hash_cyclic(String s, int shift){
+    public static int hash_cyclic(String s, int shift){
         int h = 0;
         for(int i = 0; i < s.length(); i++){
             h = (h << shift) | (h >> (32 - shift));
@@ -60,32 +66,6 @@ public class question6 {
 
         ChainHashMap<String, Integer> counter = new ChainHashMap<>();
 
-        Scanner scanner = new Scanner(f);
-
-        while(scanner.hasNext()){
-            String word = scanner.next().toLowerCase();
-            //System.out.println("word: "+word);
-
-            //if word not in hashmap add it with count 1
-            if(counter.bucketGet(word) == null){
-                counter.put( word, 1); //add number
-            }
-            else{ //if word in hashmap, increment count by 1
-                counter.put(word, counter.get(word)+1);
-            }
-        }
-
-        ArrayList<Entry<String, Integer>> topTen = new ArrayList<>();
-        for(Entry<String,Integer> e : counter.entrySet()){
-            topTen.add(e);
-            if(topTen.size() > 10){
-                topTen.sort((a,b) -> b.getValue().compareTo(a.getValue()));
-                topTen.removeLast();
-            }
-        }
-
-        for(Entry<String,Integer> e : topTen){
-            System.out.println("Word: "+ e.getKey()+", Frequency: "+ e.getValue());
-        }
+        partA(f, counter);
     }
 }
