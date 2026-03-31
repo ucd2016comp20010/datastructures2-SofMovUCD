@@ -1,10 +1,13 @@
 package project20280.hashtable;
 
 import project20280.interfaces.Entry;
+import project20280.interfaces.PriorityQueue;
+import project20280.priorityqueue.HeapPriorityQueue;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
@@ -76,6 +79,39 @@ public class question6 {
         System.out.println("(C): Number of collisions is "+ (IntStream.of(collisions).sum()-11));
     }
 
+    public static void partD(File f, ChainHashMap<String, Integer> counter) throws FileNotFoundException {
+
+        int[][] collisions = new int[32][11];
+        PriorityQueue<Integer, Integer> collisionsTotal = new HeapPriorityQueue<>();
+        int hashGotten;
+
+        for(int i = 0; i < 32; i++) {
+            Scanner scanner = new Scanner(f);
+            while (scanner.hasNext()) {
+                String word = scanner.next().toLowerCase();
+                hashGotten = Math.abs(hash_cyclic(word, i) % 11);
+
+
+                //if word not in hashmap add it with count 1
+                if (counter.bucketGet(hashGotten, word) == null) {
+                    collisions[i][hashGotten]++; //increase only when a new item is added
+                    counter.bucketPut(hashGotten, word, 1); //add number
+                } else { //if word in hashmap, increment count by 1
+                    counter.bucketPut(hashGotten, word, counter.bucketGet(hashGotten, word) + 1);
+                }
+            }
+            collisionsTotal.insert(IntStream.of(collisions[i]).sum()-11, i);
+            System.out.println("did "+ i);
+        }
+        System.out.println("(D):");
+        Entry<Integer, Integer> current;
+        while (!collisionsTotal.isEmpty()){
+            current = collisionsTotal.removeMin();
+            System.out.println("\tShift:"+current.getKey()+"Collisions: "+current.getValue());
+        }
+
+    }
+
     public static int hashCode(String s){
         int hash = 0;
         int skip = Math.max(1, s.length()/8);
@@ -110,8 +146,9 @@ public class question6 {
 
         ChainHashMap<String, Integer> counter = new ChainHashMap<>();
 
-        partA(f, counter);
-        partB(f, counter);
-        partC(f, counter);
+        //partA(f, counter);
+        //partB(f, counter);
+        //partC(f, counter);
+        partD(f, counter);
     }
 }
