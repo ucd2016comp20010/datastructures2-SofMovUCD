@@ -29,7 +29,29 @@ public class question6 {
                 counter.bucketPut(hashGotten, word, counter.bucketGet(hashGotten, word)+1);
             }
         }
-        System.out.println("Number of collisions is "+ (IntStream.of(collisions).sum()-11));
+        System.out.println("Number of collisions, for a = 41, is "+ (IntStream.of(collisions).sum()-11));
+    }
+
+    public static void partB(File f, ChainHashMap<String, Integer> counter) throws FileNotFoundException {
+        Scanner scanner = new Scanner(f);
+        int[] collisions = new int[11];
+        int hashGotten;
+
+        while(scanner.hasNext()){
+            String word = scanner.next().toLowerCase();
+            hashGotten = Math.abs(hash_poly(word, 17) % 11);
+
+
+            //if word not in hashmap add it with count 1
+            if(counter.bucketGet(hashGotten, word) == null){
+                collisions[hashGotten]++; //increase only when a new item is added
+                counter.bucketPut(hashGotten, word, 1); //add number
+            }
+            else{ //if word in hashmap, increment count by 1
+                counter.bucketPut(hashGotten, word, counter.bucketGet(hashGotten, word)+1);
+            }
+        }
+        System.out.println("Number of collisions, for a = 17, is "+ (IntStream.of(collisions).sum()-11));
     }
 
     public static int hashCode(String s){
@@ -62,10 +84,11 @@ public class question6 {
     }
 
     static void main() throws FileNotFoundException {
-        File f = new File("C:\\Users\\mysof\\IdeaProjects\\datastructures2-SofMovUCD\\sample_text.txt");
+        File f = new File("C:\\Users\\mysof\\IdeaProjects\\datastructures2-SofMovUCD\\words.txt");
 
         ChainHashMap<String, Integer> counter = new ChainHashMap<>();
 
         partA(f, counter);
+        partB(f, counter);
     }
 }
