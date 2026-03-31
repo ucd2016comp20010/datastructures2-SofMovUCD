@@ -29,7 +29,7 @@ public class question6 {
                 counter.bucketPut(hashGotten, word, counter.bucketGet(hashGotten, word)+1);
             }
         }
-        System.out.println("Number of collisions, for a = 41, is "+ (IntStream.of(collisions).sum()-11));
+        System.out.println("(A): Number of collisions is "+ (IntStream.of(collisions).sum()-11));
     }
 
     public static void partB(File f, ChainHashMap<String, Integer> counter) throws FileNotFoundException {
@@ -51,7 +51,29 @@ public class question6 {
                 counter.bucketPut(hashGotten, word, counter.bucketGet(hashGotten, word)+1);
             }
         }
-        System.out.println("Number of collisions, for a = 17, is "+ (IntStream.of(collisions).sum()-11));
+        System.out.println("(B): Number of collisions is "+ (IntStream.of(collisions).sum()-11));
+    }
+
+    public static void partC(File f, ChainHashMap<String, Integer> counter) throws FileNotFoundException {
+        Scanner scanner = new Scanner(f);
+        int[] collisions = new int[11];
+        int hashGotten;
+
+        while(scanner.hasNext()){
+            String word = scanner.next().toLowerCase();
+            hashGotten = Math.abs(hash_cyclic(word, 7) % 11);
+
+
+            //if word not in hashmap add it with count 1
+            if(counter.bucketGet(hashGotten, word) == null){
+                collisions[hashGotten]++; //increase only when a new item is added
+                counter.bucketPut(hashGotten, word, 1); //add number
+            }
+            else{ //if word in hashmap, increment count by 1
+                counter.bucketPut(hashGotten, word, counter.bucketGet(hashGotten, word)+1);
+            }
+        }
+        System.out.println("(C): Number of collisions is "+ (IntStream.of(collisions).sum()-11));
     }
 
     public static int hashCode(String s){
@@ -90,5 +112,6 @@ public class question6 {
 
         partA(f, counter);
         partB(f, counter);
+        partC(f, counter);
     }
 }
