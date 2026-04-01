@@ -32,7 +32,7 @@ public class question6 {
                 counter.bucketPut(hashGotten, word, counter.bucketGet(hashGotten, word)+1);
             }
         }
-        System.out.println("(A): Number of collisions is "+ (IntStream.of(collisions).sum()-11));
+        System.out.println("(A): Number of collisions with polynomial accumulation (a=41) is "+ (IntStream.of(collisions).sum()-11));
     }
 
     public static void partB(File f, ChainHashMap<String, Integer> counter) throws FileNotFoundException {
@@ -54,7 +54,7 @@ public class question6 {
                 counter.bucketPut(hashGotten, word, counter.bucketGet(hashGotten, word)+1);
             }
         }
-        System.out.println("(B): Number of collisions is "+ (IntStream.of(collisions).sum()-11));
+        System.out.println("(B): Number of collisions with polynomial accumulation (a=17) is "+ (IntStream.of(collisions).sum()-11));
     }
 
     public static void partC(File f, ChainHashMap<String, Integer> counter) throws FileNotFoundException {
@@ -76,7 +76,7 @@ public class question6 {
                 counter.bucketPut(hashGotten, word, counter.bucketGet(hashGotten, word)+1);
             }
         }
-        System.out.println("(C): Number of collisions is "+ (IntStream.of(collisions).sum()-11));
+        System.out.println("(C): Number of collisions, with cyclic shift value of 7, is "+ (IntStream.of(collisions).sum()-11));
     }
 
     public static void partD(File f, ChainHashMap<String, Integer> counter) throws FileNotFoundException {
@@ -131,7 +131,7 @@ public class question6 {
                 counter.bucketPut(hashGotten, word, counter.bucketGet(hashGotten, word)+1);
             }
         }
-        System.out.println("(E): Number of collisions is "+ (IntStream.of(collisions).sum()-11));
+        System.out.println("(E): Number of collisions, using old Java hash code function, is "+ (IntStream.of(collisions).sum()-11));
     }
 
     public static int hashCode(String s){
@@ -173,38 +173,38 @@ public class question6 {
         //partC(f, counter);
         //partD(f, counter);
         /* Output of partD since it takes a long time to run and always returns the same values
-        Collisions:26684 Shift: 31
-        Collisions:30217 Shift: 30
-        Collisions:32050 Shift: 29
-        Collisions:34921 Shift: 28
-        Collisions:38410 Shift: 27
-        Collisions:41884 Shift: 26
-        Collisions:42396 Shift: 24
-        Collisions:42836 Shift: 25
-        Collisions:54644 Shift: 23
-        Collisions:58874 Shift: 21
-        Collisions:60861 Shift: 22
-        Collisions:70539 Shift: 20
-        Collisions:80096 Shift: 19
-        Collisions:87827 Shift: 18
-        Collisions:95316 Shift: 17
-        Collisions:98645 Shift: 15
-        Collisions:106984 Shift: 16
-        Collisions:108664 Shift: 14
-        Collisions:127829 Shift: 13
-        Collisions:143112 Shift: 12
-        Collisions:155876 Shift: 11
-        Collisions:170535 Shift: 10
-        Collisions:198600 Shift: 9
-        Collisions:218698 Shift: 8
-        Collisions:238385 Shift: 7
-        Collisions:264550 Shift: 6
-        Collisions:288697 Shift: 5
-        Collisions:318964 Shift: 4
-        Collisions:350599 Shift: 3
-        Collisions:385585 Shift: 2
-        Collisions:424294 Shift: 1
-        Collisions:466536 Shift: 0
+        Collisions:26,684 Shift: 31
+        Collisions:30,217 Shift: 30
+        Collisions:32,050 Shift: 29
+        Collisions:34,921 Shift: 28
+        Collisions:38,410 Shift: 27
+        Collisions:41,884 Shift: 26
+        Collisions:42,396 Shift: 24
+        Collisions:42,836 Shift: 25
+        Collisions:54,644 Shift: 23
+        Collisions:58,874 Shift: 21
+        Collisions:60,861 Shift: 22
+        Collisions:70,539 Shift: 20
+        Collisions:80,096 Shift: 19
+        Collisions:87,827 Shift: 18
+        Collisions:95,316 Shift: 17
+        Collisions:98,645 Shift: 15
+        Collisions:106,984 Shift: 16
+        Collisions:108,664 Shift: 14
+        Collisions:127,829 Shift: 13
+        Collisions:143,112 Shift: 12
+        Collisions:155,876 Shift: 11
+        Collisions:170,535 Shift: 10
+        Collisions:198,600 Shift: 9
+        Collisions:218,698 Shift: 8
+        Collisions:238,385 Shift: 7
+        Collisions:264,550 Shift: 6
+        Collisions:288,697 Shift: 5
+        Collisions:318,964 Shift: 4
+        Collisions:350,599 Shift: 3
+        Collisions:385,585 Shift: 2
+        Collisions:424,294 Shift: 1
+        Collisions:466,536 Shift: 0
         */
         partE(f, counter);
     }
