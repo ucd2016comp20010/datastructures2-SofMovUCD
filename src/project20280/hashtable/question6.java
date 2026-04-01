@@ -100,16 +100,38 @@ public class question6 {
                     counter.bucketPut(hashGotten, word, counter.bucketGet(hashGotten, word) + 1);
                 }
             }
-            collisionsTotal.insert(IntStream.of(collisions[i]).sum()-11, i);
+            collisionsTotal.insert(i, IntStream.of(collisions[i]).sum()-11);
             System.out.println("did "+ i);
         }
         System.out.println("(D):");
         Entry<Integer, Integer> current;
         while (!collisionsTotal.isEmpty()){
             current = collisionsTotal.removeMin();
-            System.out.println("\tShift:"+current.getKey()+"Collisions: "+current.getValue());
+            System.out.println("\tShift:"+current.getKey()+" Collisions: "+current.getValue());
         }
 
+    }
+
+    public static void partE(File f, ChainHashMap<String, Integer> counter) throws FileNotFoundException {
+        Scanner scanner = new Scanner(f);
+        int[] collisions = new int[11];
+        int hashGotten;
+
+        while(scanner.hasNext()){
+            String word = scanner.next().toLowerCase();
+            hashGotten = Math.abs(hashCode(word) % 11);
+
+
+            //if word not in hashmap add it with count 1
+            if(counter.bucketGet(hashGotten, word) == null){
+                collisions[hashGotten]++; //increase only when a new item is added
+                counter.bucketPut(hashGotten, word, 1); //add number
+            }
+            else{ //if word in hashmap, increment count by 1
+                counter.bucketPut(hashGotten, word, counter.bucketGet(hashGotten, word)+1);
+            }
+        }
+        System.out.println("(E): Number of collisions is "+ (IntStream.of(collisions).sum()-11));
     }
 
     public static int hashCode(String s){
@@ -149,6 +171,41 @@ public class question6 {
         //partA(f, counter);
         //partB(f, counter);
         //partC(f, counter);
-        partD(f, counter);
+        //partD(f, counter);
+        /* Output of partD since it takes a long time to run and always returns the same values
+        Collisions:26684 Shift: 31
+        Collisions:30217 Shift: 30
+        Collisions:32050 Shift: 29
+        Collisions:34921 Shift: 28
+        Collisions:38410 Shift: 27
+        Collisions:41884 Shift: 26
+        Collisions:42396 Shift: 24
+        Collisions:42836 Shift: 25
+        Collisions:54644 Shift: 23
+        Collisions:58874 Shift: 21
+        Collisions:60861 Shift: 22
+        Collisions:70539 Shift: 20
+        Collisions:80096 Shift: 19
+        Collisions:87827 Shift: 18
+        Collisions:95316 Shift: 17
+        Collisions:98645 Shift: 15
+        Collisions:106984 Shift: 16
+        Collisions:108664 Shift: 14
+        Collisions:127829 Shift: 13
+        Collisions:143112 Shift: 12
+        Collisions:155876 Shift: 11
+        Collisions:170535 Shift: 10
+        Collisions:198600 Shift: 9
+        Collisions:218698 Shift: 8
+        Collisions:238385 Shift: 7
+        Collisions:264550 Shift: 6
+        Collisions:288697 Shift: 5
+        Collisions:318964 Shift: 4
+        Collisions:350599 Shift: 3
+        Collisions:385585 Shift: 2
+        Collisions:424294 Shift: 1
+        Collisions:466536 Shift: 0
+        */
+        partE(f, counter);
     }
 }
