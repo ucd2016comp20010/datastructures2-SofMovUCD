@@ -348,18 +348,21 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
     @Override
     public V put(K key, V value) throws IllegalArgumentException {
         // TODO
+        checkKey(key);
         Entry<K,V> newer = new MapEntry<>(key, value);
         Position<Entry<K,V>> found = treeSearch(root(), key);
 
-        if(found.getElement() == key){ //entry already exists
+        if(isExternal(found)){ //entry doesn't exist
             expandExternal(found, newer);
             rebalanceInsert(found);
             return null;
-        } //entry does not yet exist
-        V older = found.getElement().getValue();
-        set(found, newer);
-        rebalanceAccess(found);
-        return older;
+        }
+        else {//entry already exists
+            V older = found.getElement().getValue();
+            set(found, newer);
+            rebalanceAccess(found);
+            return older;
+        }
     }
 
     /**
