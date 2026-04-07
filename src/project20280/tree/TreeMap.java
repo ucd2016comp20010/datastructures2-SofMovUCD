@@ -61,6 +61,12 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
          */
         private void relink(Node<Entry<K, V>> parent, Node<Entry<K, V>> child, boolean makeLeftChild) {
             // TODO
+            if(makeLeftChild){
+                parent.setLeft(child);
+            }
+            else{
+                parent.setRight(child);
+            }
         }
 
         /**
