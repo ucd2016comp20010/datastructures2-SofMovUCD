@@ -301,7 +301,10 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
      */
     protected Position<Entry<K, V>> treeMin(Position<Entry<K, V>> p) {
         // TODO
-        return null;
+        while(isInternal(p)){
+            p = left(p);
+        }
+        return p;
     }
 
     /**
@@ -312,7 +315,10 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
      */
     protected Position<Entry<K, V>> treeMax(Position<Entry<K, V>> p) {
         // TODO
-        return null;
+        while(isInternal(p)){
+            p = right(p);
+        }
+        return p;
     }
 
     /**
