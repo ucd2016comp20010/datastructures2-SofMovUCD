@@ -61,6 +61,8 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
          */
         private void relink(Node<Entry<K, V>> parent, Node<Entry<K, V>> child, boolean makeLeftChild) {
             // TODO
+            child.setParent(parent);
+
             if(makeLeftChild){
                 parent.setLeft(child);
             }
@@ -85,6 +87,25 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
          */
         public void rotate(Position<Entry<K, V>> p) {
             // TODO
+            Node<Entry<K, V>> x = validate(p);
+            Node<Entry<K, V>> y = x.getParent();
+            Node<Entry<K, V>> z = y.getParent();
+
+            if(z == null){ //no grandparent
+                root = x;
+                x.setParent(null);
+            }
+            else{
+                relink(x,y,y == z.getLeft()); //y stays in the same direction
+            }
+            if(x == y.getLeft()){ //x is on the left
+                relink(x, x.getRight(), true);
+                relink(x,y,true);
+            }
+            else{
+                relink(y, x.getLeft(),false);
+                relink(x, y,true);
+            }
         }
 
         /**
