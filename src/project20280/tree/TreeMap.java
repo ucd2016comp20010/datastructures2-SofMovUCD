@@ -286,10 +286,10 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
             return p;
         }
         if(compare(key, p.getElement()) > 0){ //key > p
-            treeSearch(right(p), key);
+            return treeSearch(right(p), key);
         }
         else {
-            treeSearch(left(p), key);
+            return treeSearch(left(p), key);
         }
     }
 
