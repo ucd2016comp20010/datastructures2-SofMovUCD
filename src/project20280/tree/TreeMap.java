@@ -281,7 +281,16 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
      */
     private Position<Entry<K, V>> treeSearch(Position<Entry<K, V>> p, K key) {
         // TODO
-        return null;
+        //reach leaf, pick >< or find value
+        if(p.getElement() == key || isExternal(p)){
+            return p;
+        }
+        if(compare(key, p.getElement()) > 0){ //key > p
+            treeSearch(right(p), key);
+        }
+        else {
+            treeSearch(left(p), key);
+        }
     }
 
     /**
