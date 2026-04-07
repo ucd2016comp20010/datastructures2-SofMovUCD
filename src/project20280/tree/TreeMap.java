@@ -138,7 +138,17 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
          */
         public Position<Entry<K, V>> restructure(Position<Entry<K, V>> x) {
             // TODO
-            return null;
+            Position<Entry<K, V>> y = parent(x);
+            Position<Entry<K, V>> z = parent(y);
+            if((x == right(y)) == (y == right(z))){
+                rotate(y);
+                return y;
+            }
+            else {
+                rotate(x);
+                rotate(x);
+            }
+            return x;
         }
     } // ----------- end of nested BalanceableBinaryTree class -----------
 
