@@ -376,7 +376,26 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
     @Override
     public V remove(K key) throws IllegalArgumentException {
         // TODO
-        return null;
+        checkKey(key);// may throw IllegalArgumentException
+        Position<Entry<K, V>> p = treeSearch(root(), key);
+        if (isExternal(p)) {// key not found
+            rebalanceAccess(p);// hook for balanced tree subclasses
+            return null;
+        }
+        else {
+            V old = p.getElement().getValue();
+            if (isInternal(left(p)) && isInternal(right(p))) {// both children are internal
+                Position<Entry<K, V>> replacement = treeMax(left(p));
+                set(p, replacement.getElement());
+                p = replacement;
+            }// now p has at most one child that is an internal node
+            Position<Entry<K, V>> leaf = (isExternal(left(p)) ? left(p) : right(p));
+            Position<Entry<K, V>> sib = sibling(leaf);
+            remove(leaf);
+            remove(p);// sib is promoted in p’s place88
+            rebalanceDelete(sib);// hook for balanced tree subclasses
+            return old;
+        }
     }
 
     // additional behaviors of the SortedMap interface
