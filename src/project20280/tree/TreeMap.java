@@ -435,6 +435,8 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
     @Override
     public Entry<K, V> ceilingEntry(K key) throws IllegalArgumentException {
         // TODO
+        checkKey(key);
+
         return null;
     }
 
