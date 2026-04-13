@@ -282,10 +282,10 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
     private Position<Entry<K, V>> treeSearch(Position<Entry<K, V>> p, K key) {
         // TODO
         //reach leaf, pick >< or find value
-        if(p.getElement() == key || isExternal(p)){
+        if(p==null || p.getElement() == key || isExternal(p)){
             return p;
         }
-        if(compare(key, p.getElement()) > 0){ //key > p
+        else if(compare(key, p.getElement()) > 0){ //key > p
             return treeSearch(right(p), key);
         }
         else {
@@ -350,6 +350,10 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
         // TODO
         checkKey(key);
         Entry<K,V> newer = new MapEntry<>(key, value);
+        if(isEmpty()){ //no root
+            expandExternal(tree.root, newer); //set the root to be the entered value
+            return null;
+        }
         Position<Entry<K,V>> found = treeSearch(root(), key);
 
         if(isExternal(found)){ //entry doesn't exist
