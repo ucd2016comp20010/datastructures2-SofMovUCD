@@ -24,7 +24,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     /**
      * The number of nodes in the binary tree
      */
-    private int size = 0; // number of nodes in the tree
+    protected int size = 0; // number of nodes in the tree
 
     /**
      * Constructs an empty binary tree.
@@ -252,7 +252,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         // TODO
         validate(p);
         E value = p.getElement();
-        p = new Node<E>(e, (Node<E>) parent(p), (Node<E>) left(p), (Node<E>) right(p));
+        ((Node<E>) p).setElement(e);
 
         return value;
     }
@@ -289,10 +289,10 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     public E remove(Position<E> p) throws IllegalArgumentException {
         // TODO
         validate(p);
-        E removed = p.getElement();
-        if(left(p) != null && right(p) != null) throw new IllegalArgumentException();
+        E removed = p.getElement(); //save removed element
+        if(left(p) != null && right(p) != null) throw new IllegalArgumentException(); //p has both children
         if(root() == p){
-            root = left(p) == null? (Node<E>)right(p): (Node<E>)left(p);
+            root = left(p) == null? (Node<E>)right(p): (Node<E>)left(p); //replace the root with either left/right depending on which exists
             return removed;
         }
         ((Node<E>)parent(p)).setLeft(((Node<E>)left(p)));
