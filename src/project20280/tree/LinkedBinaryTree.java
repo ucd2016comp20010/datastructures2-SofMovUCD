@@ -214,9 +214,10 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     public Position<E> addLeft(Position<E> p, E e) throws IllegalArgumentException {
         // TODO
         validate(p);
-        Node<E> leftnode = new Node<E>(e, (Node<E>) p, (Node<E>) left(p), (Node<E>) right(p));
+        Node<E> leftnode = new Node<E>(e, (Node<E>) p, null, null);
         ((Node<E>) p).setLeft(leftnode);
-        ((Node<E>) p).setRight(null);
+        this.size++;
+        //((Node<E>) p).setRight(null);
         return leftnode;
     }
 
@@ -233,9 +234,10 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     public Position<E> addRight(Position<E> p, E e) throws IllegalArgumentException {
         // TODO
         validate(p);
-        Node<E> rightnode = new Node<E>(e, (Node<E>) p, (Node<E>) left(p), (Node<E>) right(p));
+        Node<E> rightnode = new Node<E>(e, (Node<E>) p, null, null);
         ((Node<E>) p).setRight(rightnode);
-        ((Node<E>) p).setLeft(null);
+        //((Node<E>) p).setLeft(null);
+        this.size++;
         return rightnode;
     }
 
@@ -290,6 +292,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         // TODO
         validate(p);
         E removed = p.getElement(); //save removed element
+        this.size--;
         if(left(p) != null && right(p) != null) throw new IllegalArgumentException(); //p has both children
         if(root() == p){
             root = left(p) == null? (Node<E>)right(p): (Node<E>)left(p); //replace the root with either left/right depending on which exists

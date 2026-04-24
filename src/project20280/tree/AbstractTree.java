@@ -45,12 +45,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
     @Override
     public boolean isExternal(Position<E> p) {
         // TODO
-        for (Position<E> pos : positions()){
-            if(pos == p){ //verified p is a valid member of the tree
-                return numChildren(p) == 0;
-            }
-        }
-        throw new IllegalArgumentException();
+        return numChildren(p) == 0;
     }
 
     /**
