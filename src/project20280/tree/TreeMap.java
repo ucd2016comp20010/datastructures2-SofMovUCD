@@ -320,7 +320,7 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
         while(isInternal(p)){
             p = right(p);
         }
-        return p;
+        return parent(p);
     }
 
     /**
