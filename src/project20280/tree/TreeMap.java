@@ -96,10 +96,10 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
                 x.setParent(null);
             }
             else{
-                relink(x,y,y == z.getLeft()); //y stays in the same direction
+                relink(z,x,y == z.getLeft()); //y stays in the same direction
             }
             if(x == y.getLeft()){ //x is on the left
-                relink(x, x.getRight(), true);
+                relink(y, x.getRight(), true);
                 relink(x,y,true);
             }
             else{
@@ -147,8 +147,8 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
             else {
                 rotate(x);
                 rotate(x);
-            }
-            return x;
+                return x;
+            }  
         }
     } // ----------- end of nested BalanceableBinaryTree class -----------
 
