@@ -357,7 +357,6 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
         Position<Entry<K,V>> found = treeSearch(root(), key);
 
         if(isExternal(found)){ //entry doesn't exist
-            tree.size++;
             expandExternal(found, newer);
             rebalanceInsert(found);
             return null;
